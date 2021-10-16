@@ -1,6 +1,7 @@
 # <b> _**FIBA Data Base**_ </b>
 
-    FIBA Data Base is software that allows us to quickly organize a gigantic data list of the most promising NBA players. In addition to looking for information about a player on the list faster.
+    FIBA Data Base is software that allows us to quickly organize a gigantic data list of the most promising NBA players. 
+    In addition to looking for information about a player on the list faster.
 
 ## <b> _Documentation_ </b> 📄
 
