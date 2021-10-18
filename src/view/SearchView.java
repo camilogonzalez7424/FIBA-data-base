@@ -3,6 +3,7 @@ package view;
 import java.io.IOException;
 
 import controller.SearchController;
+import controller.TopBarController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,6 +22,7 @@ public class SearchView extends Stage {
 
     private Scene scene;
     private SearchController controller;
+    private TopBarController tController;
 
     // View elements
     private TextField searchTF;
@@ -73,7 +75,9 @@ public class SearchView extends Stage {
             scene.getStylesheets().add(getClass().getResource(Routes.STYLE.getRoute()).toExternalForm());
             this.setScene(scene);
             this.initStyle(StageStyle.UNDECORATED);
+            
             controller = new SearchController(this);
+            tController = new TopBarController(this);
     
         } catch (IOException e) {
             e.printStackTrace();
@@ -85,5 +89,127 @@ public class SearchView extends Stage {
             tf.setPromptText(text);;
         });
     }
+
+    public TextField getSearchTF() {
+        return searchTF;
+    }
+
+    public void setSearchTF(TextField searchTF) {
+        this.searchTF = searchTF;
+    }
+
+    public Button getSearchBtn() {
+        return searchBtn;
+    }
+
+    public void setSearchBtn(Button searchBtn) {
+        this.searchBtn = searchBtn;
+    }
+
+    public RadioButton getByPoints() {
+        return byPoints;
+    }
+
+    public void setByPoints(RadioButton byPoints) {
+        this.byPoints = byPoints;
+    }
+
+    public RadioButton getByAssists() {
+        return byAssists;
+    }
+
+    public void setByAssists(RadioButton byAssists) {
+        this.byAssists = byAssists;
+    }
+
+    public RadioButton getByRebounds() {
+        return byRebounds;
+    }
+
+    public void setByRebounds(RadioButton byRebounds) {
+        this.byRebounds = byRebounds;
+    }
+
+    public RadioButton getBySteals() {
+        return bySteals;
+    }
+
+    public void setBySteals(RadioButton bySteals) {
+        this.bySteals = bySteals;
+    }
+
+    public RadioButton getByName() {
+        return byName;
+    }
+
+    public void setByName(RadioButton byName) {
+        this.byName = byName;
+    }
+
+    public RadioButton getByAge() {
+        return byAge;
+    }
+
+    public void setByAge(RadioButton byAge) {
+        this.byAge = byAge;
+    }
+
+    public RadioButton getByTeam() {
+        return byTeam;
+    }
+
+    public void setByTeam(RadioButton byTeam) {
+        this.byTeam = byTeam;
+    }
+
+    public ToggleGroup getFilter() {
+        return filter;
+    }
+
+    public void setFilter(ToggleGroup filter) {
+        this.filter = filter;
+    }
+
+    public Circle getRedBtn() {
+        return redBtn;
+    }
+
+    public void setRedBtn(Circle redBtn) {
+        this.redBtn = redBtn;
+    }
+
+    public Circle getYellowBtn() {
+        return yellowBtn;
+    }
+
+    public void setYellowBtn(Circle yellowBtn) {
+        this.yellowBtn = yellowBtn;
+    }
+
+    public MenuItem getGoSearch() {
+        return goSearch;
+    }
+
+    public void setGoSearch(MenuItem goSearch) {
+        this.goSearch = goSearch;
+    }
+
+    public MenuItem getGoAdd() {
+        return goAdd;
+    }
+
+    public void setGoAdd(MenuItem goAdd) {
+        this.goAdd = goAdd;
+    }
+
+    public MenuItem getGoImport() {
+        return goImport;
+    }
+
+    public void setGoImport(MenuItem goImport) {
+        this.goImport = goImport;
+    }
+
+    
 }
 
