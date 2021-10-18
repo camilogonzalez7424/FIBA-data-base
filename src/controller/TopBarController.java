@@ -11,27 +11,24 @@ import view.SearchView;
 
 public class TopBarController {
 
-    private SearchView searchView;
-    private ResultView resultView;
-    private AddView addView;
-
     private GeneralController gController;
 
     public TopBarController(SearchView searchView) {
         gController = new GeneralController();
-        this.searchView = searchView;
         btnAction(searchView.getRedBtn(), searchView.getYellowBtn());
         menuActions(searchView.getGoSearch(), searchView.getGoAdd(), searchView.getGoImport(), searchView);
     }
 
     public TopBarController(ResultView resultView) {
         gController = new GeneralController();
-        this.resultView = resultView;
+        btnAction(resultView.getRedBtn(), resultView.getYellowBtn());
+        menuActions(resultView.getGoSearch(), resultView.getGoAdd(), resultView.getGoImport(), resultView);
     }
 
     public TopBarController(AddView addView) {
         gController = new GeneralController();
-        this.addView = addView;
+        btnAction(addView.getRedBtn(), addView.getYellowBtn());
+        menuActions(addView.getGoSearch(), addView.getGoAdd(), addView.getGoImport(), addView);
 
     }
 
