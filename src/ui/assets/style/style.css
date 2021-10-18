@@ -1,0 +1,40 @@
+ .mainTitle{
+    -fx-font-family: "Ubuntu";
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+    -fx-font-size: 30px;
+    -fx-font-color: rgb(255, 255, 255);
+}
+.normalText{
+    -fx-font-family: "Ubuntu";
+    -fx-font-size: 14px;
+    -fx-font-color: rgb(255, 255, 255);
+}
+.button{
+    -fx-background-color : rgb(213, 20, 62) ;
+    -fx-font-color: rgb(255, 255, 255);
+    -fx-background-radius: 5;
+    -fx-font-weight: bold;
+}
+.button-menu{
+    -fx-background-color :none ;
+    -fx-border-color: rgb(29, 39, 68) ;
+    -fx-border-width: 3;
+    -fx-border-radius: 5;
+}
+.back1 {
+    -fx-background-color : rgb(17, 25, 49);
+}
+.back2 {
+    -fx-background-color : rgb(29, 39, 68);
+}
+.text-field{
+    -fx-font-color: rgb(255, 255, 255);
+    -fx-background-color : rgb(109, 120, 151);
+}
+
+#board{
+    -fx-background-radius:5 5 5 5;
+    -fx-border-radius: 5;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
