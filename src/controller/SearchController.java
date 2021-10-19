@@ -1,11 +1,14 @@
 package controller;
 
+import java.util.ArrayList;
+
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.Alert.AlertType;
+import model.Player;
 import view.ResultView;
 import view.SearchView;
 
@@ -13,10 +16,17 @@ public class SearchController {
 
     private SearchView view;
     private GeneralController gController;
+    private ArrayList<Player> queryResult;
 
     public SearchController(SearchView searchView) {
         this.view = searchView;
         this.gController = new GeneralController();
+
+        queryResult = new ArrayList<>();
+        queryResult.add(new Player(0, "Pedro", "Bulls", 23, 5, 4, 10, 30));
+        queryResult.add(new Player(1, "Rodrigo", "Celtics", 30, 11, 6, 7, 27));
+        queryResult.add(new Player(2, "Andres", "Heat", 27, 2, 8, 14, 40));
+
         btnActions();
         toggleActions();
     }
@@ -29,9 +39,10 @@ public class SearchController {
             if (makeQuery(query)) {
 
                 Platform.runLater(() -> {
-                    ResultView resultView = new ResultView();
+                    ResultView resultView = new ResultView(queryResult);
                     view.close();
                     resultView.show();
+                    resultView.getController().initializeTableView();
                 });
             } else {
                 gController.alert(AlertType.ERROR, "Query Fail", "Please check input and the filter selection");
@@ -146,11 +157,12 @@ public class SearchController {
             case "by name":
 
                 // Realizar la consulta
+                result = true;
 
                 break;
             case "by age":
                 try {
-                    
+
                     int age = Integer.parseInt(query);
 
                 } catch (NumberFormatException e) {
@@ -163,7 +175,6 @@ public class SearchController {
 
                 break;
         }
-
         return result;
     }
 

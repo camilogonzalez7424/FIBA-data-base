@@ -1,6 +1,7 @@
 package view;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import controller.ResultController;
 import controller.TopBarController;
@@ -46,7 +47,7 @@ public class ResultView extends Stage {
     private MenuItem goImport;
     
     @SuppressWarnings("unchecked")
-    public ResultView(){
+    public ResultView(ArrayList<Player> queryResult){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(Routes.RESULT_VIEW.getRoute()));
             Parent parent = loader.load();
@@ -76,7 +77,7 @@ public class ResultView extends Stage {
             this.setScene(scene);
             this.initStyle(StageStyle.UNDECORATED);
             
-            controller = new ResultController(this);
+            controller = new ResultController(this, queryResult);
             tController = new TopBarController(this);
     
         } catch (IOException e) {
@@ -144,6 +145,8 @@ public class ResultView extends Stage {
         return reboundsCol;
     }
 
-    
+    public ResultController getController() {
+        return controller;
+    }
 
 }
