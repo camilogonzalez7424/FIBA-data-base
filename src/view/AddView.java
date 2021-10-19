@@ -131,5 +131,13 @@ public class AddView extends Stage{
         return stealsTF;
     }
 
+    public AddController getController() {
+        return controller;
+    }
+
+    public TopBarController gettController() {
+        return tController;
+    }
+
     
 }

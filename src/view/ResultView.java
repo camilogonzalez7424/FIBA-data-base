@@ -149,4 +149,7 @@ public class ResultView extends Stage {
         return controller;
     }
 
+    public TopBarController gettController() {
+        return tController;
+    }
 }
