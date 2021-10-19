@@ -84,7 +84,8 @@ public class SearchView extends Stage {
         }
     }
 
-    public void setPromptText(TextField tf, String text) {
+    public void setPromptText(String text) {
+        TextField tf = searchTF;
         Platform.runLater(() -> {
             tf.setPromptText(text);;
         });

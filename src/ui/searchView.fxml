@@ -48,14 +48,14 @@
    <center>
       <AnchorPane prefHeight="332.0" prefWidth="780.0" styleClass="back2" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="searchTF" layoutX="198.0" layoutY="149.0" prefHeight="26.0" prefWidth="322.0" promptText="Please write the player name" />
+            <TextField fx:id="searchTF" layoutX="134.0" layoutY="149.0" prefHeight="26.0" prefWidth="448.0" promptText="Please write the player name" />
             <Label layoutX="318.0" layoutY="35.0" styleClass="mainTitle" text="Welcome" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="28.0" />
                </font>
             </Label>
             <Label layoutX="225.0" layoutY="80.0" prefHeight="53.0" prefWidth="330.0" styleClass="normalText" text="Here you can find the stadistics of the baskectball players around the world, you can filter the query by differen atributest" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
-            <Button fx:id="searchBtn" layoutX="528.0" layoutY="149.0" mnemonicParsing="false" text="Search" textFill="WHITE" />
+            <Button fx:id="searchBtn" layoutX="592.0" layoutY="149.0" mnemonicParsing="false" text="Search" textFill="WHITE" />
             <RadioButton fx:id="byPoints" layoutX="154.0" layoutY="222.0" mnemonicParsing="false" text="by points" textFill="WHITE">
                <toggleGroup>
                   <ToggleGroup fx:id="filter" />
