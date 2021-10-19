@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
-import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Player;
 import view.ResultView;
