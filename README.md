@@ -15,7 +15,6 @@
 + [Java](https://www.java.com/es/) - Programming language used.
 + [Visual Studio Code](https://code.visualstudio.com/) - IDE in which the base code was worked.
 + [Scene Builder](https://gluonhq.com/products/scene-builder/) - GUI development programt.
-+ [JFoenix](https://github.com/sshahine/JFoenix) - Library to improve the appearance of the GUI.
 
 ## <b> _Overview_ </b> 💻🕹️
 

@@ -2,7 +2,8 @@ package routes;
 
 public enum Routes{
 
-    MAIN_VIEW("../ui/assets/main.fxml");
+    SEARCH_VIEW("../ui/searchView.fxml"), RESULT_VIEW("../ui/resultView.fxml"), ADD_VIEW("../ui/addView.fxml"), 
+    STYLE("../ui/assets/style/style.css"); 
 
     private String route;
 

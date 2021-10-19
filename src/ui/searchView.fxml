@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane id="board" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="780.0" style="-fx-border-radius: 5; -fx-background-radius: 5;" stylesheets="@assets/style/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <AnchorPane prefHeight="62.0" prefWidth="780.0" styleClass="back1" BorderPane.alignment="CENTER">
+         <children>
+            <Circle fx:id="redBtn" fill="#9a1212" layoutX="741.0" layoutY="27.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" AnchorPane.bottomAnchor="18.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="18.0">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+               <effect>
+                  <Bloom />
+               </effect>
+            </Circle>
+            <Circle fx:id="yellowBtn" fill="#b97c22" layoutX="709.0" layoutY="27.0" radius="9.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+               <cursor>
+                  <Cursor fx:constant="OPEN_HAND" />
+               </cursor>
+               <effect>
+                  <Blend opacity="0.29" />
+               </effect>
+            </Circle>
+            <MenuButton layoutX="14.0" layoutY="14.0" mnemonicParsing="false" styleClass="button-menu" text="Menu" textFill="WHITE">
+              <items>
+                  <MenuItem fx:id="goSearch" mnemonicParsing="false" text="Search" />
+                <MenuItem fx:id="goAdd" mnemonicParsing="false" text="Add" />
+                <MenuItem fx:id="goImport" mnemonicParsing="false" text="Import" />
+              </items>
+            </MenuButton>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane prefHeight="332.0" prefWidth="780.0" styleClass="back2" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="searchTF" layoutX="134.0" layoutY="149.0" prefHeight="26.0" prefWidth="448.0" promptText="Please write the player name" />
+            <Label layoutX="318.0" layoutY="35.0" styleClass="mainTitle" text="Welcome" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="28.0" />
+               </font>
+            </Label>
+            <Label layoutX="225.0" layoutY="80.0" prefHeight="53.0" prefWidth="330.0" styleClass="normalText" text="Here you can find the stadistics of the baskectball players around the world, you can filter the query by differen atributest" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+            <Button fx:id="searchBtn" layoutX="592.0" layoutY="149.0" mnemonicParsing="false" text="Search" textFill="WHITE" />
+            <RadioButton fx:id="byPoints" layoutX="154.0" layoutY="222.0" mnemonicParsing="false" text="by points" textFill="WHITE">
+               <toggleGroup>
+                  <ToggleGroup fx:id="filter" />
+               </toggleGroup>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="byAssists" layoutX="276.0" layoutY="222.0" mnemonicParsing="false" text="by assists" textFill="WHITE" toggleGroup="$filter">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="byRebounds" layoutX="399.0" layoutY="222.0" mnemonicParsing="false" text="by rebounds" textFill="WHITE" toggleGroup="$filter">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="bySteals" layoutX="546.0" layoutY="222.0" mnemonicParsing="false" text="by steals" textFill="WHITE" toggleGroup="$filter">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="byName" layoutX="205.0" layoutY="265.0" mnemonicParsing="false" selected="true" text="by name" textFill="WHITE" toggleGroup="$filter" />
+            <RadioButton fx:id="byAge" layoutX="342.0" layoutY="265.0" mnemonicParsing="false" text="by age" textFill="WHITE" toggleGroup="$filter" />
+            <RadioButton fx:id="byTeam" layoutX="475.0" layoutY="265.0" mnemonicParsing="false" text="by team" textFill="WHITE" toggleGroup="$filter" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
