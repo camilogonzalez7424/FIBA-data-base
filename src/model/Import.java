@@ -12,7 +12,7 @@ public class Import {
 
     }
 
-    public void importClients(String path) throws IOException, FileNotFoundException {
+    public void importPlayer(String path) throws IOException, FileNotFoundException {
 
         BufferedReader br = new BufferedReader(new FileReader(path));
         String line = br.readLine();
@@ -23,7 +23,7 @@ public class Import {
 
             Player temp = new Player(Integer.parseInt(parts[0]), parts[1], parts[2], Integer.parseInt(parts[3]),
                     Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]),
-                    Integer.parseInt(parts[7]));
+                    Integer.parseInt(parts[7]),Integer.parseInt(parts[8]));
 
             // Añadir atributos a los arboles
 
@@ -53,7 +53,7 @@ public class Import {
             if(needed){
                 Player temp = new Player(Integer.parseInt(parts[0]), parts[1], parts[2], Integer.parseInt(parts[3]),
                     Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]),
-                    Integer.parseInt(parts[7]));
+                    Integer.parseInt(parts[7]), Integer.parseInt(parts[8]));
 
             // Añadir al resultado del query
             }
