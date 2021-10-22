@@ -21,9 +21,9 @@ public class Import {
         while (line != null) {
             String[] parts = line.split(";");
 
-            Player temp = new Player(Integer.parseInt(parts[0]), parts[1], parts[2], Integer.parseInt(parts[3]),
-                    Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]),
-                    Integer.parseInt(parts[7]),Integer.parseInt(parts[8]));
+            Player temp = new Player(parts[0], parts[1], Integer.parseInt(parts[2]),
+                    Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]),
+                    Integer.parseInt(parts[6]),Integer.parseInt(parts[7]));
 
             // Añadir atributos a los arboles
 
@@ -51,9 +51,9 @@ public class Import {
                 }
             }
             if(needed){
-                Player temp = new Player(Integer.parseInt(parts[0]), parts[1], parts[2], Integer.parseInt(parts[3]),
-                    Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]),
-                    Integer.parseInt(parts[7]), Integer.parseInt(parts[8]));
+                Player temp = new Player(parts[0], parts[1], Integer.parseInt(parts[2]),
+                    Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]),
+                    Integer.parseInt(parts[6]), Integer.parseInt(parts[7]));
 
             // Añadir al resultado del query
             }
