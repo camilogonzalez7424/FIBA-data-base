@@ -1,11 +1,11 @@
 package collections.AVL;
 
-public class AVLTree<K extends Comparable<K>,V> {
+public class AVLTree<K extends Comparable<K>,V> implements ActionAVL<K,V>{
 
     private AVLTreeNode<K,V> root;
     private int size;
 
-
+	@Override
 	public boolean add(K k, V v) {
 		if (root == null){
 			root = new AVLTreeNode<>(k, v, this);
@@ -20,7 +20,7 @@ public class AVLTree<K extends Comparable<K>,V> {
 		
 	}
 
-	
+	@Override
 	public boolean remove(K k) {
 		if (root == null) 
         return false;
@@ -66,7 +66,7 @@ public class AVLTree<K extends Comparable<K>,V> {
 		return false;
 	}
 
-	
+	@Override
 	public AVLTreeNode<K, V> searchNode(K k) {
 		if (root == null) 
         return null;
@@ -80,7 +80,7 @@ public class AVLTree<K extends Comparable<K>,V> {
 		else return root.searchByRange(kStart,kEnd);
 	}*/
 
-	
+	@Override
 	public V search(K k) {
 		if (root == null){
 			return null;
@@ -95,17 +95,17 @@ public class AVLTree<K extends Comparable<K>,V> {
 		
 	}
 
-	
+	@Override
 	public boolean isEmpty() {
 		return size==0;
 	}
 
-	
+	@Override
 	public int size() {
 		return size;
 	}
 
-	
+	@Override
 	public boolean keyExists(K k) {
 		if (root == null) 
         return false;

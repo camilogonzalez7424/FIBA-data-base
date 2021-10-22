@@ -2,21 +2,19 @@ package model;
 
 public class Player {
 
-    private long storePos;
-
     private String name;
     private String team;
-
     private int age;
+   
     private int assists;
     private int steals;
     private int rebounds;
     private int points;
-    private int block;
+    private int games;
+   
 
-    public Player(long storePos, String name, String team, int age, int assists, int steals, int rebounds, int points, int block) {
+    public Player(String name, String team, int age, int assists, int steals, int rebounds, int points, int games) {
         
-        this.storePos   = storePos;
         this.name       = name;
         this.team       = team;
         this.age        = age;
@@ -24,16 +22,10 @@ public class Player {
         this.steals     = steals;
         this.rebounds   = rebounds;
         this.points     = points;
-        this.block      = block;
+        this.games      = games;
     }
 
-    public long getStorePos() {
-        return storePos;
-    }
-
-    public void setStorePos(long storePos) {
-        this.storePos = storePos;
-    }
+//_______________Getters and Setters_______________
 
     public String getName() {
         return name;
@@ -91,12 +83,12 @@ public class Player {
         this.points = points;
     }
 
-    public int getBlock(){
-        return block;
+    public int getGames(){
+        return games;
     }
 
-    public void setBlock(int block){
-        this.block = block;
+    public void setBlock(int games){
+        this.games = games;
     }
     
 }
