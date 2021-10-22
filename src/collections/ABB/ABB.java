@@ -1,4 +1,4 @@
-package model;
+package collections.ABB;
 
 public class ABB<K extends Comparable<K>, V> implements ActionABB<K,V>{
 

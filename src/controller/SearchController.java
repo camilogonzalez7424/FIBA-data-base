@@ -23,9 +23,9 @@ public class SearchController {
         this.gController = new GeneralController();
 
         queryResult = new ArrayList<>();
-        queryResult.add(new Player(0, "Pedro", "Bulls", 23, 5, 4, 10, 30,12));
-        queryResult.add(new Player(1, "Rodrigo", "Celtics", 30, 11, 6, 7, 27,15));
-        queryResult.add(new Player(2, "Andres", "Heat", 27, 2, 8, 14, 40,24));
+        queryResult.add(new Player(45, "Pedro", "Bulls", 23, 5, 4, 10, 30,12));
+        queryResult.add(new Player(18, "Rodrigo", "Celtics", 30, 11, 6, 7, 27,15));
+        queryResult.add(new Player(34, "Andres", "Heat", 27, 2, 8, 14, 40,24));
 
         btnActions();
         toggleActions();

@@ -1,4 +1,4 @@
-package model;
+package collections.ABB;
 
 public interface ActionABB<K,V> {
     public V search(K key);

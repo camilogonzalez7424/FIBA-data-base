@@ -37,7 +37,7 @@ public class ResultView extends Stage {
     private TableColumn<Player, Integer> stealsCol;
     private TableColumn<Player, Integer> assistsCol;
     private TableColumn<Player, Integer> reboundsCol;
-
+    private TableColumn<Player, Integer> gamesCol;
 
     // View general
     private Circle redBtn;
@@ -71,6 +71,7 @@ public class ResultView extends Stage {
             stealsCol = (TableColumn<Player, Integer>) loader.getNamespace().get("stealsCol");
             assistsCol = (TableColumn<Player, Integer>) loader.getNamespace().get("assistsCol");
             reboundsCol = (TableColumn<Player, Integer>) loader.getNamespace().get("reboundsCol");
+            gamesCol = (TableColumn<Player, Integer>) loader.getNamespace().get("gamesCol");
             
             scene = new Scene(parent);
             scene.getStylesheets().add(getClass().getResource(Routes.STYLE.getRoute()).toExternalForm());
@@ -152,4 +153,9 @@ public class ResultView extends Stage {
     public TopBarController gettController() {
         return tController;
     }
+
+    public TableColumn<Player, Integer> getGamesCol() {
+        return gamesCol;
+    }
+    
 }

@@ -1,4 +1,4 @@
-package model;
+package collections.ABB;
 
 public class NodeABB <K,V> {
         private K key;

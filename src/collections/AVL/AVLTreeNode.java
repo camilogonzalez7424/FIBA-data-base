@@ -1,4 +1,4 @@
-package model;
+package collections.AVL;
 
 //import java.util.LinkedList;
 

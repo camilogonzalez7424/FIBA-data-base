@@ -43,6 +43,7 @@ public class ResultController {
         view.getStealsCol().setCellValueFactory(new PropertyValueFactory<Player, Integer>("steals"));
         view.getAgeCol().setCellValueFactory(new PropertyValueFactory<Player, Integer>("age"));
         view.getReboundsCol().setCellValueFactory(new PropertyValueFactory<Player, Integer>("rebounds"));
+        view.getGamesCol().setCellValueFactory(new PropertyValueFactory<Player, Integer>("games"));
 
         view.getTable().setItems(results);
     }
