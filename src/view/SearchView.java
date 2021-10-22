@@ -27,6 +27,7 @@ public class SearchView extends Stage {
     // View elements
     private TextField searchTF;
     private Button searchBtn;
+
     private RadioButton byPoints;
     private RadioButton byAssists;
     private RadioButton byRebounds;
@@ -34,6 +35,7 @@ public class SearchView extends Stage {
     private RadioButton byName;
     private RadioButton byAge;
     private RadioButton byTeam;
+    private RadioButton byGame;
 
     private ToggleGroup filter;
 
@@ -70,6 +72,7 @@ public class SearchView extends Stage {
             byName = (RadioButton) loader.getNamespace().get("byName");
             byAge = (RadioButton) loader.getNamespace().get("byAge");
             byTeam = (RadioButton) loader.getNamespace().get("byTeam");
+            byGame = (RadioButton) loader.getNamespace().get("byGame");
             
             scene = new Scene(parent);
             scene.getStylesheets().add(getClass().getResource(Routes.STYLE.getRoute()).toExternalForm());

@@ -23,9 +23,9 @@ public class SearchController {
         this.gController = new GeneralController();
 
         queryResult = new ArrayList<>();
-        queryResult.add(new Player(45, "Pedro", "Bulls", 23, 5, 4, 10, 30,12));
-        queryResult.add(new Player(18, "Rodrigo", "Celtics", 30, 11, 6, 7, 27,15));
-        queryResult.add(new Player(34, "Andres", "Heat", 27, 2, 8, 14, 40,24));
+        queryResult.add(new Player(45, "Pedro", "Bulls", 23, 5, 4, 10, 30, 12));
+        queryResult.add(new Player(18, "Rodrigo", "Celtics", 30, 11, 6, 7, 27, 15));
+        queryResult.add(new Player(34, "Andres", "Heat", 27, 2, 8, 14, 40, 24));
 
         btnActions();
         toggleActions();
@@ -71,27 +71,30 @@ public class SearchController {
         String msg = "";
 
         switch (key) {
-            case "by points":
-                msg = "Please write the range of points #-# (without space)";
-                break;
-            case "by assists":
-                msg = "Please write the range of assists #-# (without space)";
-                break;
-            case "by rebounds":
-                msg = "Please write the range of rebounds #-# (without space)";
-                break;
-            case "by steals":
-                msg = "Please write the range of steals #-# (without space)";
-                break;
-            case "by name":
-                msg = "Please write the player name";
-                break;
-            case "by age":
-                msg = "Please write the player age";
-                break;
-            case "by team":
-                msg = "Please write the player team name";
-                break;
+        case "by points":
+            msg = "Please write the range of points #-# (without space)";
+            break;
+        case "by assists":
+            msg = "Please write the range of assists #-# (without space)";
+            break;
+        case "by rebounds":
+            msg = "Please write the range of rebounds #-# (without space)";
+            break;
+        case "by steals":
+            msg = "Please write the range of steals #-# (without space)";
+            break;
+        case "by name":
+            msg = "Please write the player name";
+            break;
+        case "by age":
+            msg = "Please write the player age";
+            break;
+        case "by games":
+            msg = "Please write the number of games played";
+            break;
+        case "by team":
+            msg = "Please write the player team name";
+            break;
         }
         return msg;
     }
@@ -102,78 +105,83 @@ public class SearchController {
         RadioButton rb = (RadioButton) view.getFilter().getSelectedToggle();
 
         switch (rb.getText()) {
-            case "by points":
-                String[] parts = query.split("-");
+        case "by points":
+            String[] parts = query.split("-");
 
-                try {
-                    int inf = Integer.parseInt(parts[0]);
-                    int sup = Integer.parseInt(parts[1]);
-
-                    // Realizar la consulta
-
-                } catch (NumberFormatException e) {
-                    result = false;
-                }
-                break;
-            case "by assists":
-                parts = query.split("-");
-
-                try {
-                    int inf = Integer.parseInt(parts[0]);
-                    int sup = Integer.parseInt(parts[1]);
-
-                    // Realizar la consulta
-
-                } catch (NumberFormatException e) {
-                    result = false;
-                }
-                break;
-            case "by rebounds":
-                parts = query.split("-");
-
-                try {
-                    int inf = Integer.parseInt(parts[0]);
-                    int sup = Integer.parseInt(parts[1]);
-
-                    // Realizar la consulta
-
-                } catch (NumberFormatException e) {
-                    result = false;
-                }
-                break;
-            case "by steals":
-                parts = query.split("-");
-
-                try {
-                    int inf = Integer.parseInt(parts[0]);
-                    int sup = Integer.parseInt(parts[1]);
-
-                    // Realizar la consulta
-
-                } catch (NumberFormatException e) {
-                    result = false;
-                }
-                break;
-            case "by name":
-
-                // Realizar la consulta
-                result = true;
-
-                break;
-            case "by age":
-                try {
-
-                    int age = Integer.parseInt(query);
-
-                } catch (NumberFormatException e) {
-                    result = false;
-                }
-                break;
-            case "by team":
+            try {
+                int inf = Integer.parseInt(parts[0]);
+                int sup = Integer.parseInt(parts[1]);
 
                 // Realizar la consulta
 
-                break;
+            } catch (NumberFormatException e) {
+                result = false;
+            }
+            break;
+        case "by assists":
+            parts = query.split("-");
+
+            try {
+                int inf = Integer.parseInt(parts[0]);
+                int sup = Integer.parseInt(parts[1]);
+
+                // Realizar la consulta
+
+            } catch (NumberFormatException e) {
+                result = false;
+            }
+            break;
+        case "by rebounds":
+            parts = query.split("-");
+
+            try {
+                int inf = Integer.parseInt(parts[0]);
+                int sup = Integer.parseInt(parts[1]);
+
+                // Realizar la consulta
+
+            } catch (NumberFormatException e) {
+                result = false;
+            }
+            break;
+        case "by steals":
+            parts = query.split("-");
+
+            try {
+                int inf = Integer.parseInt(parts[0]);
+                int sup = Integer.parseInt(parts[1]);
+
+                // Realizar la consulta
+
+            } catch (NumberFormatException e) {
+                result = false;
+            }
+            break;
+        case "by name":
+
+            // Realizar la consulta
+            result = true;
+
+            break;
+        case "by age":
+            try {
+
+                int age = Integer.parseInt(query);
+
+            } catch (NumberFormatException e) {
+                result = false;
+            }
+            break;
+        case "by team":
+
+            // Realizar la consulta
+
+            break;
+        case "by games":
+
+            // Realizar la consulta
+
+            break;
         }
         return result;
     }
