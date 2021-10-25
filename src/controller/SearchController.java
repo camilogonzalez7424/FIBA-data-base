@@ -8,6 +8,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.Alert.AlertType;
+import model.DataStructure;
 import model.Player;
 import view.ResultView;
 import view.SearchView;
@@ -39,7 +40,7 @@ public class SearchController {
             if (makeQuery(query)) {
 
                 Platform.runLater(() -> {
-                    ResultView resultView = new ResultView(queryResult);
+                    ResultView resultView = new ResultView(queryResult, System.currentTimeMillis(), DataStructure.ABB.getDataStructure());
                     view.close();
                     resultView.show();
                     resultView.getController().initializeTableView();

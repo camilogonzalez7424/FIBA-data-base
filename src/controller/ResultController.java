@@ -7,18 +7,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Player;
+import model.Query.queryListener;
 import view.ResultView;
 import view.SearchView;
 
-public class ResultController {
+public class ResultController implements queryListener {
 
     private ResultView view;
     private ArrayList<Player> queryResult;
+    private long initTime;
+    private String structure;
 
-    public ResultController(ResultView resultView, ArrayList<Player> queryResult) {
+    public ResultController(ResultView resultView, ArrayList<Player> queryResult, long initTime, String structure) {
         view = resultView;
         this.queryResult = queryResult;
-
+        this.initTime = initTime;
+        this.structure = structure;
         goBack();
     }
 
@@ -46,6 +50,13 @@ public class ResultController {
         view.getGamesCol().setCellValueFactory(new PropertyValueFactory<Player, Integer>("games"));
 
         view.getTable().setItems(results);
+    }
+
+    @Override
+    public void onResult(ArrayList<Player> result) {
+        queryResult = result;
+        long queryTime = System.currentTimeMillis() - initTime;
+        view.setTimeLabel("Searching time: " + queryTime + "Data structure: " + structure );
     }
 
 }

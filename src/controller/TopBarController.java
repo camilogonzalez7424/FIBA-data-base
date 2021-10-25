@@ -18,30 +18,30 @@ public class TopBarController {
 
     public TopBarController(SearchView searchView) {
         gController = new GeneralController();
-        btnAction(searchView.getRedBtn(), searchView.getYellowBtn());
+        btnAction(searchView.getRedBtn(), searchView.getYellowBtn(), searchView.getStage());
         menuActions(searchView.getGoSearch(), searchView.getGoAdd(), searchView.getGoImport(), searchView);
     }
 
     public TopBarController(ResultView resultView) {
         gController = new GeneralController();
-        btnAction(resultView.getRedBtn(), resultView.getYellowBtn());
+        btnAction(resultView.getRedBtn(), resultView.getYellowBtn(), resultView.getStage());
         menuActions(resultView.getGoSearch(), resultView.getGoAdd(), resultView.getGoImport(), resultView);
     }
 
     public TopBarController(AddView addView) {
         gController = new GeneralController();
-        btnAction(addView.getRedBtn(), addView.getYellowBtn());
+        btnAction(addView.getRedBtn(), addView.getYellowBtn(), addView.getStage());
         menuActions(addView.getGoSearch(), addView.getGoAdd(), addView.getGoImport(), addView);
 
     }
 
-    private void btnAction(Circle red, Circle yellow) {
+    private void btnAction(Circle red, Circle yellow,  Stage stage) {
         red.setOnMouseClicked(e -> {
             System.exit(0);
         });
 
         yellow.setOnMouseClicked(e -> {
-            System.exit(0);
+           stage.setIconified(true);
         });
     }
 

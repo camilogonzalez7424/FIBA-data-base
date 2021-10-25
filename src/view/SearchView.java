@@ -130,6 +130,10 @@ public class SearchView extends Stage {
         return byTeam;
     }
 
+    public RadioButton getByGame() {
+        return byGame;
+    }
+
     public ToggleGroup getFilter() {
         return filter;
     }
@@ -161,5 +165,10 @@ public class SearchView extends Stage {
     public TopBarController getTController() {
         return tController;
     }
+
+    public Stage getStage(){
+        return (Stage) scene.getWindow();
+    }
+
 }
 

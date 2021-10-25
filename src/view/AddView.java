@@ -139,5 +139,8 @@ public class AddView extends Stage{
         return tController;
     }
 
+    public Stage getStage(){
+        return (Stage) scene.getWindow();
+    }
     
 }
