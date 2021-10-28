@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.App;
 import model.Player;
 import model.Query.queryListener;
 import view.ResultView;
@@ -17,19 +18,21 @@ public class ResultController implements queryListener {
     private ArrayList<Player> queryResult;
     private long initTime;
     private String structure;
+    private App app;
 
-    public ResultController(ResultView resultView, ArrayList<Player> queryResult, long initTime, String structure) {
+    public ResultController(ResultView resultView, ArrayList<Player> queryResult, long initTime, String structure, App app) {
         view = resultView;
         this.queryResult = queryResult;
         this.initTime = initTime;
         this.structure = structure;
+        this.app =  app;
         goBack();
     }
 
     private void goBack() {
         view.getCancelLabel().setOnMouseClicked((me) -> {
             Platform.runLater(() -> {
-                SearchView sv = new SearchView();
+                SearchView sv = new SearchView(app);
                 view.close();
                 sv.show();
             });
@@ -52,9 +55,10 @@ public class ResultController implements queryListener {
         view.getTable().setItems(results);
     }
 
+
     @Override
-    public void onResult(ArrayList<Player> result) {
-        queryResult = result;
+    public <K extends Comparable<K>, V> void onResult(ArrayList<V> result) {
+        queryResult = (ArrayList<Player>) result;
         long queryTime = System.currentTimeMillis() - initTime;
         view.setTimeLabel("Searching time: " + queryTime + "Data structure: " + structure );
     }

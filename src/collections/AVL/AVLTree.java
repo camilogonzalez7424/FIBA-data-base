@@ -1,5 +1,7 @@
 package collections.AVL;
 
+import java.util.ArrayList;
+
 public class AVLTree<K extends Comparable<K>,V> implements ActionAVL<K,V>{
 
     private AVLTreeNode<K,V> root;
@@ -66,13 +68,13 @@ public class AVLTree<K extends Comparable<K>,V> implements ActionAVL<K,V>{
 		return false;
 	}
 
-	@Override
+	/* @Override
 	public AVLTreeNode<K, V> searchNode(K k) {
 		if (root == null) 
         return null;
 		else return 
         root.search(k);
-	}
+	} */
 	
     /* Probar, igual se puede utilizar el mismo buscar del BTS, Es más podemos heredar
 	public LinkedList<V> searchByRange(K kStart, K kEnd){
@@ -81,7 +83,22 @@ public class AVLTree<K extends Comparable<K>,V> implements ActionAVL<K,V>{
 	}*/
 
 	@Override
-	public V search(K k) {
+	public ArrayList<V> search(K key){
+		ArrayList<V> result = new ArrayList<>();
+        search(root, result, key);
+        return result;
+	}
+
+	private void search(AVLTreeNode<K, V> root,ArrayList<V> list, K key ){
+        if (root != null) {
+            search(root.getLeft(), list, key);
+            if(root.getKey().equals(key)){
+                list.add(root.getValue());
+            }
+            search(root.getRight(), list, key);
+        }
+    }
+	/* public V search(K k) {
 		if (root == null){
 			return null;
 		}else{
@@ -94,7 +111,7 @@ public class AVLTree<K extends Comparable<K>,V> implements ActionAVL<K,V>{
 		}
 		
 	}
-
+ */
 	@Override
 	public boolean isEmpty() {
 		return size==0;

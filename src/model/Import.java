@@ -12,7 +12,7 @@ public class Import {
 
     }
 
-    public void importPlayer(String path) throws IOException, FileNotFoundException {
+    public void importPlayer(String path, ArrayList<Player> list) throws IOException, FileNotFoundException {
 
         BufferedReader br = new BufferedReader(new FileReader(path));
         String line = br.readLine();
@@ -26,38 +26,7 @@ public class Import {
                     Integer.parseInt(parts[6]),Integer.parseInt(parts[7]));
 
             // Añadir atributos a los arboles
-
-            line = br.readLine();
-        }
-
-        br.close();
-    }
-
-    public void importSelected(String path, ArrayList<Long> indexes) throws IOException, FileNotFoundException {
-
-        BufferedReader br = new BufferedReader(new FileReader(path));
-        String line = br.readLine();
-        line = br.readLine();
-
-        while (line != null) {
-            String[] parts = line.split(";");
-            boolean needed = false;
-            
-            for (Long index : indexes) {
-                if(index == Integer.parseInt(parts[0])){
-                    needed = true;
-                } else {
-                    needed = false;
-                }
-            }
-            if(needed){
-                Player temp = new Player(parts[0], parts[1], Integer.parseInt(parts[2]),
-                    Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]),
-                    Integer.parseInt(parts[6]), Integer.parseInt(parts[7]));
-
-            // Añadir al resultado del query
-            }
-
+            list.add(temp);
             line = br.readLine();
         }
 

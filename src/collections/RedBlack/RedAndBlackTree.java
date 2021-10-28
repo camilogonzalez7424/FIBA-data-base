@@ -1,5 +1,5 @@
 package collections.RedBlack;
 
-public class RedAndBlackTree {
+public class RedAndBlackTree<K extends Comparable<K>,V>  {
     
 }
