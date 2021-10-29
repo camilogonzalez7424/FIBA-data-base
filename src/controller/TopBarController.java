@@ -22,21 +22,21 @@ public class TopBarController {
     public TopBarController(SearchView searchView, App app) {
         gController = new GeneralController();
         btnAction(searchView.getRedBtn(), searchView.getYellowBtn(), searchView.getStage());
-        menuActions(searchView.getGoSearch(), searchView.getGoAdd(), searchView.getGoImport(), searchView);
+        menuActions(searchView.getGoSearch(), searchView.getGoAdd(), searchView.getGoImport(), searchView, searchView.getClean());
         this.app = app;
     }
 
     public TopBarController(ResultView resultView, App app) {
         gController = new GeneralController();
         btnAction(resultView.getRedBtn(), resultView.getYellowBtn(), resultView.getStage());
-        menuActions(resultView.getGoSearch(), resultView.getGoAdd(), resultView.getGoImport(), resultView);
+        menuActions(resultView.getGoSearch(), resultView.getGoAdd(), resultView.getGoImport(), resultView, resultView.getClean());
         this.app = app;
     }
 
     public TopBarController(AddView addView, App app) {
         gController = new GeneralController();
         btnAction(addView.getRedBtn(), addView.getYellowBtn(), addView.getStage());
-        menuActions(addView.getGoSearch(), addView.getGoAdd(), addView.getGoImport(), addView);
+        menuActions(addView.getGoSearch(), addView.getGoAdd(), addView.getGoImport(), addView, addView.getClean());
         this.app = app;
     }
 
@@ -50,7 +50,7 @@ public class TopBarController {
         });
     }
 
-    private void menuActions(MenuItem goSearch, MenuItem goAdd, MenuItem goImport, Stage stage) {
+    private void menuActions(MenuItem goSearch, MenuItem goAdd, MenuItem goImport, Stage stage, MenuItem clean) {
         goSearch.setOnAction(e -> {
             Platform.runLater(() -> {
                 SearchView sv = new SearchView(app);
@@ -86,5 +86,8 @@ public class TopBarController {
             });
         });
 
+        clean.setOnAction((e)->{
+            app.clean();
+        });
     }
 }

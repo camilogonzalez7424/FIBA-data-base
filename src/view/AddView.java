@@ -42,6 +42,7 @@ public class AddView extends Stage{
     private MenuItem goSearch;
     private MenuItem goAdd;
     private MenuItem goImport;
+    private MenuItem clean;
     
     public AddView(App app){
         try {
@@ -54,6 +55,7 @@ public class AddView extends Stage{
             goSearch = (MenuItem) loader.getNamespace().get("goSearch");
             goAdd = (MenuItem) loader.getNamespace().get("goAdd");
             goImport = (MenuItem) loader.getNamespace().get("goImport");
+            clean = (MenuItem) loader.getNamespace().get("clean");
 
             cancelLabel = (Label) loader.getNamespace().get("cancelLabel");
             saveBtn = (Button) loader.getNamespace().get("saveBtn");
@@ -148,6 +150,10 @@ public class AddView extends Stage{
 
     public TextField getGamesTF() {
         return gamesTF;
+    }
+
+    public MenuItem getClean() {
+        return clean;
     }
     
 }

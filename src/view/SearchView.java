@@ -46,6 +46,8 @@ public class SearchView extends Stage {
     private MenuItem goSearch;
     private MenuItem goAdd;
     private MenuItem goImport;
+    private MenuItem clean;
+
 
     
     public SearchView(App app){
@@ -59,6 +61,7 @@ public class SearchView extends Stage {
             goSearch = (MenuItem) loader.getNamespace().get("goSearch");
             goAdd = (MenuItem) loader.getNamespace().get("goAdd");
             goImport = (MenuItem) loader.getNamespace().get("goImport");
+            clean = (MenuItem) loader.getNamespace().get("clean");
             
 
             searchTF = (TextField) loader.getNamespace().get("searchTF");
@@ -171,5 +174,10 @@ public class SearchView extends Stage {
         return (Stage) scene.getWindow();
     }
 
+    public MenuItem getClean() {
+        return clean;
+    }
+
+    
 }
 

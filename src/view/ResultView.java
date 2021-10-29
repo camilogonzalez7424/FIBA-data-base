@@ -49,6 +49,7 @@ public class ResultView extends Stage {
     private MenuItem goSearch;
     private MenuItem goAdd;
     private MenuItem goImport;
+    private MenuItem clean;
     
     @SuppressWarnings("unchecked")
     public ResultView(ArrayList<Player> queryResult, App app){
@@ -62,6 +63,7 @@ public class ResultView extends Stage {
             goSearch = (MenuItem) loader.getNamespace().get("goSearch");
             goAdd = (MenuItem) loader.getNamespace().get("goAdd");
             goImport = (MenuItem) loader.getNamespace().get("goImport");
+            clean = (MenuItem) loader.getNamespace().get("clean");
 
             cancelLabel = (Label) loader.getNamespace().get("cancelLabel");
             exportBtn = (Button) loader.getNamespace().get("exportBtn");
@@ -177,6 +179,10 @@ public class ResultView extends Stage {
 
     public Label getTimeLabel() {
         return timeLabel;
+    }
+
+    public MenuItem getClean() {
+        return clean;
     }
     
 }

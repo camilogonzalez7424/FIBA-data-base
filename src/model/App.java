@@ -161,4 +161,18 @@ public class App implements Serializable {
         stealsAVL.add(temp.getSteals(), temp);
     }
 
+    public void clean() {
+        players = new ArrayList<>();
+
+        pointsABB = new ABB<>();
+        assistsABB = new ABB<>();
+        reboundsABB = new ABB<>();
+        stealsABB = new ABB<>();
+
+        pointsRB = new RedAndBlackTree<>();
+        assistsAVL = new AVLTree<>();
+        reboundsAVL = new AVLTree<>();
+        stealsAVL = new AVLTree<>();
+    }
+
 }
