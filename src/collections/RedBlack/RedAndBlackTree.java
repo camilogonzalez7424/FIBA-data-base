@@ -1,6 +1,7 @@
 package collections.RedBlack;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class RedAndBlackTree<K extends Comparable<K>,V> implements ActionRedAndBlack<K,V> , Serializable{
     private static final long serialVersionUID = 324532;
@@ -10,11 +11,13 @@ public class RedAndBlackTree<K extends Comparable<K>,V> implements ActionRedAndB
     private RedAndBlackNode<K,V> root = redBlack;
 
     //Constructor
-    RedAndBlackTree(){
+    public RedAndBlackTree(){
         root.setParent(redBlack);
         root.setRight(redBlack);
         root.setLeft(redBlack);
     }
+
+	
 
     @Override
 	public void insert(K k, V v) {
@@ -140,7 +143,7 @@ public class RedAndBlackTree<K extends Comparable<K>,V> implements ActionRedAndB
 
     @Override
 	public boolean remove(K k) {
-		RedAndBlackNode<K, V> a = search(k);
+		RedAndBlackNode<K, V> a = searchRemove(k);
 		if (a == null)
 		{
 			return false;
@@ -154,7 +157,7 @@ public class RedAndBlackTree<K extends Comparable<K>,V> implements ActionRedAndB
 	
 	public void remove(RedAndBlackNode<K,V> v){
 
-		RedAndBlackNode<K,V> z = search(v.getKey());
+		RedAndBlackNode<K,V> z = searchRemove(v.getKey());
 
 		
 		RedAndBlackNode<K,V> x = redBlack;
@@ -474,8 +477,8 @@ public class RedAndBlackTree<K extends Comparable<K>,V> implements ActionRedAndB
 		
 	}
 
-	@Override
-	public RedAndBlackNode<K, V> search(K key) {
+	
+	public RedAndBlackNode<K, V> searchRemove(K key) {
 		RedAndBlackNode<K,V> current = root;
 
 		
@@ -501,17 +504,31 @@ public class RedAndBlackTree<K extends Comparable<K>,V> implements ActionRedAndB
 		
 	}
 	
-	public V searchValue(K key)
-	{
-		RedAndBlackNode<K, V> a = search(key);
-		if (a == null)
-		{
+	public V searchValue(K key){
+		RedAndBlackNode<K, V> a = searchRemove(key);
+		if (a == null){
 			return null;
-		}else
-		{
+		}else{
 			return a.getValue();
 		}
 	}
+
+	@Override
+	public ArrayList<V> search(K key){
+		ArrayList<V> result = new ArrayList<>();
+        search(root, result, key);
+        return result;
+	}
+
+	private void search(RedAndBlackNode<K, V> root,ArrayList<V> list, K key ){
+        if (root != null) {
+            search(root.getLeft(), list, key);
+            if(root.getKey().equals(key)){
+                list.add(root.getValue());
+            }
+            search(root.getRight(), list, key);
+        }
+    }
 
 
     public RedAndBlackNode<K,V> treeMinimum(RedAndBlackNode<K,V> node){

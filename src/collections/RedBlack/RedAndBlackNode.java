@@ -99,5 +99,10 @@ public class RedAndBlackNode<K extends Comparable<K>, V> {
 	public void setNumRight(int numRight) {
 		this.numRight = numRight;
 	}
+
+	//Jamás se usa pero evita Warnings XD
+	public int getColorRed(){
+		return RED;
+	}
 	 
 }
