@@ -5,27 +5,26 @@ public class Player {
     private String name;
     private String team;
     private int age;
-   
+
     private int assists;
     private int steals;
     private int rebounds;
     private int points;
     private int games;
-   
 
-    public Player(String name, String team, int age, int assists, int steals, int rebounds, int points, int games) {
-        
-        this.name       = name;
-        this.team       = team;
-        this.age        = age;
-        this.assists    = assists;
-        this.steals     = steals;
-        this.rebounds   = rebounds;
-        this.points     = points;
-        this.games      = games;
+    public Player(String name, int age, String team, int points, int rebounds, int assists, int steals, int games) {
+
+        this.name = name;
+        this.team = team;
+        this.age = age;
+        this.assists = assists;
+        this.steals = steals;
+        this.rebounds = rebounds;
+        this.points = points;
+        this.games = games;
     }
 
-//_______________Getters and Setters_______________
+    // _______________Getters and Setters_______________
 
     public String getName() {
         return name;
@@ -83,12 +82,12 @@ public class Player {
         this.points = points;
     }
 
-    public int getGames(){
+    public int getGames() {
         return games;
     }
 
-    public void setBlock(int games){
+    public void setBlock(int games) {
         this.games = games;
     }
-    
+
 }

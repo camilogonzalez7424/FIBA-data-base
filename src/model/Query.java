@@ -17,13 +17,13 @@ public class Query implements Serializable {
 
     public void searchABB(ABB<Integer,Player> tree, int key ){
        ArrayList<Player> result = new ArrayList<>();
-       result = ( tree.search(key) == null)? result :  tree.search(key);
+       result = tree.search(key);
         listener.onResult(result);
     }
 
     public void searchAVL(AVLTree<Integer, Player> tree, int key) {
         ArrayList<Player> result = new ArrayList<>();
-        result = ( tree.search(key) == null)? result :  tree.search(key);
+        result = tree.search(key);
         listener.onResult(result);
     }
 
