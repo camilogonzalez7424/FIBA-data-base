@@ -24,23 +24,15 @@ public class ABB<K extends Comparable<K>, V> implements ActionABB<K, V>, Seriali
             return root;
         }
 
-        if (key.compareTo(root.getKey()) <= 0)
+        if (key.compareTo(root.getKey()) < 0) {
             root.setLeft(insert(root.getLeft(), key, value));
-        else if (key.compareTo(root.getKey()) > 0)
+
+        } else if (key.compareTo(root.getKey()) >= 0) {
             root.setRight(insert(root.getRight(), key, value));
+        }
 
         return root;
     }
-
-    /*
-     * if (root == null) { root = new NodeABB<>(key, value); return root; }
-     * 
-     * if (key.compareTo(root.getKey()) < 0){ root.setLeft(insert(root.getLeft(),
-     * key, value)); } else if (key.compareTo(root.getKey()) > 0){
-     * root.setRight(insert(root.getRight(), key, value)); }
-     * 
-     * return root;
-     */
 
     @Override
     public ArrayList<V> search(K key) {

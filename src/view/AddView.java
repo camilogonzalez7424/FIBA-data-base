@@ -34,6 +34,7 @@ public class AddView extends Stage{
     private TextField reboundsTF;
     private TextField assistsTF;
     private TextField stealsTF;
+    private TextField gamesTF;
 
     // View general
     private Circle redBtn;
@@ -64,6 +65,7 @@ public class AddView extends Stage{
             reboundsTF = (TextField) loader.getNamespace().get("reboundsTF");
             assistsTF = (TextField) loader.getNamespace().get("assistsTF");
             stealsTF = (TextField) loader.getNamespace().get("stealsTF");
+            gamesTF = (TextField) loader.getNamespace().get("gamesTF");
             
             scene = new Scene(parent);
             scene.getStylesheets().add(getClass().getResource(Routes.STYLE.getRoute()).toExternalForm());
@@ -142,6 +144,10 @@ public class AddView extends Stage{
 
     public Stage getStage(){
         return (Stage) scene.getWindow();
+    }
+
+    public TextField getGamesTF() {
+        return gamesTF;
     }
     
 }

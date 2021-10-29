@@ -38,7 +38,7 @@ public class App implements Serializable {
     public App() {
         players = new ArrayList<>();
 
-        query =  new Query();
+        query = new Query();
 
         pointsABB = new ABB<>();
         assistsABB = new ABB<>();
@@ -80,7 +80,7 @@ public class App implements Serializable {
     }
 
     // Import
-    public void importPlayers(String path) throws FileNotFoundException, IOException{
+    public void importPlayers(String path) throws FileNotFoundException, IOException {
         im.importPlayer(path, players);
     }
 
@@ -146,7 +146,19 @@ public class App implements Serializable {
         return query;
     }
 
+    public void addPlayer(Player temp) {
+        players.add(temp);
+        pointsABB.insert(temp.getPoints(), temp);
+        // pointsRB.insert(temp.getPoints(), temp);
 
+        assistsABB.insert(temp.getAssists(), temp);
+        assistsAVL.add(temp.getAssists(), temp);
 
-    
+        reboundsABB.insert(temp.getRebounds(), temp);
+        reboundsAVL.add(temp.getRebounds(), temp);
+
+        stealsABB.insert(temp.getSteals(), temp);
+        stealsAVL.add(temp.getSteals(), temp);
+    }
+
 }
