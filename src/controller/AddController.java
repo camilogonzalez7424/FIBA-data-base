@@ -3,6 +3,7 @@ package controller;
 import javafx.application.Platform;
 import javafx.scene.control.Alert.AlertType;
 import model.App;
+import model.Player;
 import view.AddView;
 import view.SearchView;
 
@@ -23,7 +24,20 @@ public class AddController {
     private void saveBtn() {
         view.getSaveBtn().setOnAction((e)->{
             if (complete()) {
-                // Añadir a la Base de datos el nuevo item
+
+                String name = view.getPlayerNameTF().getText();
+                String team = view.getTeamTF().getText();
+
+                int age = Integer.parseInt(view.getAgeTF().getText());
+                int points = Integer.parseInt(view.getPointsTF().getText());
+                int rebounds = Integer.parseInt(view.getReboundsTF().getText());
+                int assists = Integer.parseInt(view.getAssistsTF().getText());
+                int steals = Integer.parseInt(view.getStealsTF().getText());
+                int games = Integer.parseInt(view.getGamesTF().getText());
+
+                Player temp = new Player(name, age, team, points, rebounds, assists, steals, games);
+                app.addPlayer(temp);
+                gController.alert(AlertType.INFORMATION, "Success", "Player created successfully");
                 goBack();
             } else {
                 gController.alert(AlertType.WARNING, "Warning", "Please fill all fields");
@@ -36,7 +50,7 @@ public class AddController {
         if (view.getAgeTF().getText().equals("") || view.getAssistsTF().getText().equals("")
                 || view.getPointsTF().getText().equals("") || view.getTeamTF().getText().equals("")
                 || view.getStealsTF().getText().equals("") || view.getReboundsTF().getText().equals("")
-                || view.getPlayerNameTF().getText().equals("")) {
+                || view.getPlayerNameTF().getText().equals("") || view.getGamesTF().getText().equals(""))  {
             return false;
         } else {
             return true;

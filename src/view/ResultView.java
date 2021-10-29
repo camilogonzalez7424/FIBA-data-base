@@ -65,6 +65,7 @@ public class ResultView extends Stage {
 
             cancelLabel = (Label) loader.getNamespace().get("cancelLabel");
             exportBtn = (Button) loader.getNamespace().get("exportBtn");
+            exportBtn.setVisible(false);
 
             
             table = (TableView<Player>) loader.getNamespace().get("table");
