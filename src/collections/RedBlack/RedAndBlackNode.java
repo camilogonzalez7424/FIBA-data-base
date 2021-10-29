@@ -2,8 +2,8 @@ package collections.RedBlack;
 
 public class RedAndBlackNode<K extends Comparable<K>, V> {
 
-    private static final int BLACK = 0;
-	//private static final int RED = 1;
+    private static final int BLACK = 0; // The colors are constant
+	private static final int RED = 1;
 	
 	//Crear un enum para los colores, investigar más 
 
@@ -20,7 +20,7 @@ public class RedAndBlackNode<K extends Comparable<K>, V> {
 	private int numRight;
 	
 	RedAndBlackNode(){
-        color = BLACK;
+        color = BLACK; //El arbol siempre tiene raiz negra
         numLeft = 0;
         numRight = 0;
         parent = null;
