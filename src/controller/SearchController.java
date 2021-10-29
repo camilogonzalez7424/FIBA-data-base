@@ -34,11 +34,13 @@ public class SearchController implements queryListener {
         this.gController = new GeneralController();
         app.getQuery().setListener(this);
         queryResult = new ArrayList<>();
+
         /*
          * queryResult.add(new Player("Pedro", "Bulls", 23, 5, 4, 10, 30, 12));
          * queryResult.add(new Player("Rodrigo", "Celtics", 30, 11, 6, 7, 27, 15));
          * queryResult.add(new Player("Andres", "Heat", 27, 2, 8, 14, 40, 24));
          */
+
 
         btnActions();
         toggleActions();
