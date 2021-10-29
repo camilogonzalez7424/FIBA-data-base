@@ -5,11 +5,13 @@ import java.util.ArrayList;
 
 import controller.ResultController;
 import controller.TopBarController;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.App;
 import model.Player;
 import routes.Routes;
 import javafx.scene.control.Button;
@@ -39,6 +41,8 @@ public class ResultView extends Stage {
     private TableColumn<Player, Integer> reboundsCol;
     private TableColumn<Player, Integer> gamesCol;
 
+    private Label timeLabel;
+
     // View general
     private Circle redBtn;
     private Circle yellowBtn;
@@ -47,7 +51,7 @@ public class ResultView extends Stage {
     private MenuItem goImport;
     
     @SuppressWarnings("unchecked")
-    public ResultView(ArrayList<Player> queryResult){
+    public ResultView(ArrayList<Player> queryResult, App app){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(Routes.RESULT_VIEW.getRoute()));
             Parent parent = loader.load();
@@ -72,18 +76,26 @@ public class ResultView extends Stage {
             assistsCol = (TableColumn<Player, Integer>) loader.getNamespace().get("assistsCol");
             reboundsCol = (TableColumn<Player, Integer>) loader.getNamespace().get("reboundsCol");
             gamesCol = (TableColumn<Player, Integer>) loader.getNamespace().get("gamesCol");
+
+            timeLabel = (Label) loader.getNamespace().get("timeLabel");
             
             scene = new Scene(parent);
             scene.getStylesheets().add(getClass().getResource(Routes.STYLE.getRoute()).toExternalForm());
             this.setScene(scene);
             this.initStyle(StageStyle.UNDECORATED);
             
-            controller = new ResultController(this, queryResult);
-            tController = new TopBarController(this);
+            controller = new ResultController(this, queryResult, app);
+            tController = new TopBarController(this, app);
     
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setTimeLabel(String text) {
+        Platform.runLater(() -> {
+            timeLabel.setText(text);
+        });
     }
 
     public Circle getRedBtn() {
@@ -156,6 +168,14 @@ public class ResultView extends Stage {
 
     public TableColumn<Player, Integer> getGamesCol() {
         return gamesCol;
+    }
+
+    public Stage getStage(){
+        return (Stage) scene.getWindow();
+    }
+
+    public Label getTimeLabel() {
+        return timeLabel;
     }
     
 }

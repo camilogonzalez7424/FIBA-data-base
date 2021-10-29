@@ -6,26 +6,32 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.App;
 import model.Player;
 import view.ResultView;
 import view.SearchView;
 
-public class ResultController {
+public class ResultController{
 
     private ResultView view;
     private ArrayList<Player> queryResult;
+    private App app;
 
-    public ResultController(ResultView resultView, ArrayList<Player> queryResult) {
+    public ResultController(ResultView resultView, ArrayList<Player> queryResult, App app) {
         view = resultView;
         this.queryResult = queryResult;
-
+        this.app =  app;
         goBack();
+    }
+
+    public void queryLabel(String time, String structure){
+        view.setTimeLabel("Searching time: " + time + " // Data structure: " + structure );
     }
 
     private void goBack() {
         view.getCancelLabel().setOnMouseClicked((me) -> {
             Platform.runLater(() -> {
-                SearchView sv = new SearchView();
+                SearchView sv = new SearchView(app);
                 view.close();
                 sv.show();
             });

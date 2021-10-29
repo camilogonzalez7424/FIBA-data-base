@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.App;
 import routes.Routes;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -41,7 +42,7 @@ public class AddView extends Stage{
     private MenuItem goAdd;
     private MenuItem goImport;
     
-    public AddView(){
+    public AddView(App app){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(Routes.ADD_VIEW.getRoute()));
             Parent parent = loader.load();
@@ -69,8 +70,8 @@ public class AddView extends Stage{
             this.setScene(scene);
             this.initStyle(StageStyle.UNDECORATED);
             
-            controller = new AddController(this);
-            tController = new TopBarController(this);
+            controller = new AddController(this, app);
+            tController = new TopBarController(this, app);
     
         } catch (IOException e) {
             e.printStackTrace();
@@ -139,5 +140,8 @@ public class AddView extends Stage{
         return tController;
     }
 
+    public Stage getStage(){
+        return (Stage) scene.getWindow();
+    }
     
 }

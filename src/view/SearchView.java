@@ -16,6 +16,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.App;
 import routes.Routes;
 
 public class SearchView extends Stage {
@@ -47,7 +48,7 @@ public class SearchView extends Stage {
     private MenuItem goImport;
 
     
-    public SearchView(){
+    public SearchView(App app){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(Routes.SEARCH_VIEW.getRoute()));
             Parent parent = loader.load();
@@ -79,8 +80,8 @@ public class SearchView extends Stage {
             this.setScene(scene);
             this.initStyle(StageStyle.UNDECORATED);
             
-            controller = new SearchController(this);
-            tController = new TopBarController(this);
+            controller = new SearchController(this, app);
+            tController = new TopBarController(this, app);
     
         } catch (IOException e) {
             e.printStackTrace();
@@ -130,6 +131,10 @@ public class SearchView extends Stage {
         return byTeam;
     }
 
+    public RadioButton getByGame() {
+        return byGame;
+    }
+
     public ToggleGroup getFilter() {
         return filter;
     }
@@ -161,5 +166,10 @@ public class SearchView extends Stage {
     public TopBarController getTController() {
         return tController;
     }
+
+    public Stage getStage(){
+        return (Stage) scene.getWindow();
+    }
+
 }
 

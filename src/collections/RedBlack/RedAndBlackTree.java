@@ -1,7 +1,9 @@
 package collections.RedBlack;
 
-public class RedAndBlackTree<K extends Comparable<K>,V> implements ActionRedAndBlack<K,V>{
-    
+import java.io.Serializable;
+
+public class RedAndBlackTree<K extends Comparable<K>,V> implements ActionRedAndBlack<K,V> , Serializable{
+    private static final long serialVersionUID = 324532;
     
     private RedAndBlackNode<K,V> redBlack = new RedAndBlackNode<>();
 
@@ -610,5 +612,5 @@ public class RedAndBlackTree<K extends Comparable<K>,V> implements ActionRedAndB
 		this.root = root;
 	}
 
-
 }
+

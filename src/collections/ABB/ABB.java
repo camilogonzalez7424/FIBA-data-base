@@ -1,7 +1,11 @@
 package collections.ABB;
 
-public class ABB<K extends Comparable<K>, V> implements ActionABB<K,V>{
+import java.io.Serializable;
+import java.util.ArrayList;
 
+public class ABB<K extends Comparable<K>, V> implements ActionABB<K,V>, Serializable{
+    private static final long serialVersionUID = 456543;
+    
     private NodeABB<K, V> root;
 
     public void BTS() {
@@ -29,7 +33,7 @@ public class ABB<K extends Comparable<K>, V> implements ActionABB<K,V>{
     }
 
     @Override
-    public V search(K key){
+    /* public V search(K key){
         return search(root, key).getValue();
     }
 
@@ -42,6 +46,21 @@ public class ABB<K extends Comparable<K>, V> implements ActionABB<K,V>{
             return search(root.getRight(), key);
 
         return search(root.getLeft(), key);
+    } */
+    public ArrayList<V> search(K key){
+        ArrayList<V> result = new ArrayList<>();
+        search(root, result, key);
+        return result;
+    }
+
+    private void search(NodeABB<K, V> root,ArrayList<V> list, K key ){
+        if (root != null) {
+            search(root.getLeft(), list, key);
+            if(root.getKey().equals(key)){
+                list.add(root.getValue());
+            }
+            search(root.getRight(), list, key);
+        }
     }
 
     @Override

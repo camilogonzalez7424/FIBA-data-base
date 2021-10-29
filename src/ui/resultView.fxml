@@ -47,7 +47,7 @@
                </columnResizePolicy>
             </TableView>
             <Button fx:id="exportBtn" layoutX="684.0" layoutY="311.0" mnemonicParsing="false" text="Export" textFill="WHITE" />
-            <Label fx:id="timeLebel" layoutX="125.0" layoutY="21.0" text="Tiempo y metodo" textFill="WHITE" />
+            <Label fx:id="timeLabel" layoutX="125.0" layoutY="21.0" text="Buscando ..." textFill="WHITE" />
          </children>
       </AnchorPane>
    </center>

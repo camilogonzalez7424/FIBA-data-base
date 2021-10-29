@@ -8,11 +8,13 @@ import java.util.ArrayList;
 
 public class Import {
 
-    public Import() {
+    private App app;
 
+    public Import(App app) {
+        this.app = app;
     }
 
-    public void importPlayer(String path) throws IOException, FileNotFoundException {
+    public void importPlayer(String path, ArrayList<Player> list) throws IOException, FileNotFoundException {
 
         BufferedReader br = new BufferedReader(new FileReader(path));
         String line = br.readLine();
@@ -21,42 +23,24 @@ public class Import {
         while (line != null) {
             String[] parts = line.split(";");
 
-            Player temp = new Player(parts[0], parts[1], Integer.parseInt(parts[2]),
-                    Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]),
-                    Integer.parseInt(parts[6]),Integer.parseInt(parts[7]));
+            Player temp = new Player(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]),
+                    Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]),
+                    Integer.parseInt(parts[7]));
 
             // Añadir atributos a los arboles
+            list.add(temp);
 
-            line = br.readLine();
-        }
+            app.getPointsABB().insert(temp.getPoints(), temp);
+            //app.getPointsRB().insert(temp.getPoints(), temp);
 
-        br.close();
-    }
+            app.getAssistsABB().insert(temp.getAssists(), temp);
+            app.getAssistsAVL().add(temp.getAssists(), temp);
 
-    public void importSelected(String path, ArrayList<Long> indexes) throws IOException, FileNotFoundException {
+            app.getReboundsABB().insert(temp.getRebounds(), temp);
+            app.getReboundsAVL().add(temp.getRebounds(), temp);
 
-        BufferedReader br = new BufferedReader(new FileReader(path));
-        String line = br.readLine();
-        line = br.readLine();
-
-        while (line != null) {
-            String[] parts = line.split(";");
-            boolean needed = false;
-            
-            for (Long index : indexes) {
-                if(index == Integer.parseInt(parts[0])){
-                    needed = true;
-                } else {
-                    needed = false;
-                }
-            }
-            if(needed){
-                Player temp = new Player(parts[0], parts[1], Integer.parseInt(parts[2]),
-                    Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]),
-                    Integer.parseInt(parts[6]), Integer.parseInt(parts[7]));
-
-            // Añadir al resultado del query
-            }
+            app.getStealsABB().insert(temp.getSteals(), temp);
+            app.getStealsAVL().add(temp.getSteals(), temp);
 
             line = br.readLine();
         }

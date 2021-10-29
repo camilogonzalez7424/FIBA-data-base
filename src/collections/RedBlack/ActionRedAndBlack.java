@@ -10,5 +10,5 @@ public interface ActionRedAndBlack<K extends Comparable<K>, V> {
     public void leftRotate(RedAndBlackNode<K,V> a);
 	public void leftRotateRepair(RedAndBlackNode<K,V> a);
 	public void fixNodeData(RedAndBlackNode<K,V> a, RedAndBlackNode<K,V> b);
-	public RedAndBlackNode<K,V> search(K key);
+	public RedAndBlackNode<K,V> search(K key); //Return ArrayList
 }

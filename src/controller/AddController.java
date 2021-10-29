@@ -2,6 +2,7 @@ package controller;
 
 import javafx.application.Platform;
 import javafx.scene.control.Alert.AlertType;
+import model.App;
 import view.AddView;
 import view.SearchView;
 
@@ -9,9 +10,11 @@ public class AddController {
 
     private AddView view;
     private GeneralController gController;
+    private App app;
 
-    public AddController(AddView addView) {
+    public AddController(AddView addView, App app) {
         view = addView;
+        this.app = app;
         gController = new GeneralController();
         goBackAction();
         saveBtn();
@@ -48,7 +51,7 @@ public class AddController {
 
     private void goBack(){
         Platform.runLater(() -> {
-            SearchView sv = new SearchView();
+            SearchView sv = new SearchView(app);
             view.close();
             sv.show();
         });
