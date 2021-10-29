@@ -161,7 +161,6 @@ public class SearchController implements queryListener {
         case "by assists":
 
             try {
-
                 if (tree) {
                     app.ABBSearch(Integer.parseInt(query), app.getAssistsABB());
                     dataStructure = DataStructure.ABB.getDataStructure();
@@ -169,7 +168,6 @@ public class SearchController implements queryListener {
                     app.AVLSearch(Integer.parseInt(query), app.getAssistsAVL());
                     dataStructure = DataStructure.AVL.getDataStructure();
                 }
-
                 result = true;
 
             } catch (NumberFormatException e) {
