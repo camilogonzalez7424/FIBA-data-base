@@ -1,24 +1,29 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import collections.ABB.ABB;
 import collections.AVL.AVLTree;
 import collections.RedBlack.RedAndBlackTree;
 
-public class Query {
+public class Query implements Serializable {
 
+    private static final long serialVersionUID = 43564389;
+    
     private queryListener listener;
 
     public Query(){}
 
     public void searchABB(ABB<Integer,Player> tree, int key ){
-       ArrayList<Player> result = tree.search(key);
+       ArrayList<Player> result = new ArrayList<>();
+       result = ( tree.search(key) == null)? result :  tree.search(key);
         listener.onResult(result);
     }
 
     public void searchAVL(AVLTree<Integer, Player> tree, int key) {
-        ArrayList<Player> result = tree.search(key);
+        ArrayList<Player> result = new ArrayList<>();
+        result = ( tree.search(key) == null)? result :  tree.search(key);
         listener.onResult(result);
     }
 
@@ -65,10 +70,18 @@ public class Query {
         listener.onResult(result);
     }
     
-    
-
     public interface queryListener  {
-        public <K extends Comparable<K>,V> void onResult(ArrayList<V> result);
+        public void onResult(ArrayList<Player> result);
     }
+
+    public queryListener getListener() {
+        return listener;
+    }
+
+    public void setListener(queryListener listener) {
+        this.listener = listener;
+    }
+
+   
 
 }

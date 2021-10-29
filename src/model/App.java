@@ -1,12 +1,22 @@
 package model;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import collections.ABB.ABB;
 import collections.AVL.AVLTree;
 import collections.RedBlack.RedAndBlackTree;
 
-public class App {
+public class App implements Serializable {
+
+    private static final long serialVersionUID = 1241302341;
 
     private Query query;
     private ArrayList<Player> players;
@@ -21,21 +31,37 @@ public class App {
     private AVLTree<Integer, Player> reboundsAVL;
     private AVLTree<Integer, Player> stealsAVL;
 
+    private Import im;
+
+    public final static String FILE_NAME = "data/db.fiba";
+
     public App() {
+        players = new ArrayList<>();
+
+        query =  new Query();
+
+        pointsABB = new ABB<>();
+        assistsABB = new ABB<>();
+        reboundsABB = new ABB<>();
+        stealsABB = new ABB<>();
+
+        pointsRB = new RedAndBlackTree<>();
+        assistsAVL = new AVLTree<>();
+        reboundsAVL = new AVLTree<>();
+        stealsAVL = new AVLTree<>();
+
+        im = new Import(this);
     }
 
     public void ABBSearch(int key, ABB<Integer, Player> tree) {
-        query = new Query();
         query.searchABB(tree, key);
     }
 
     public void AVLSearch(int key, AVLTree<Integer, Player> tree) {
-        query = new Query();
         query.searchAVL(tree, key);
     }
 
     public void linearSearch(String key, String searchBy) {
-        query = new Query();
 
         switch (searchBy) {
         case "by name":
@@ -53,6 +79,31 @@ public class App {
         }
     }
 
+    // Import
+    public void importPlayers(String path) throws FileNotFoundException, IOException{
+        im.importPlayer(path, players);
+    }
+
+    // ------------------------------------ Serialization
+
+    public void saveData() throws IOException {
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME));
+        oos.writeObject(this);
+        oos.close();
+    }
+
+    public boolean loadData(App app) throws IOException, ClassNotFoundException {
+        File f = new File(FILE_NAME);
+        boolean loaded = false;
+        if (f.exists()) {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+            app = (App) ois.readObject();
+            ois.close();
+            loaded = true;
+        }
+        return loaded;
+    }
+
     // ------------------------------------ Getter and Setters
 
     public ArrayList<Player> getPlayers() {
@@ -62,6 +113,7 @@ public class App {
     public ABB<Integer, Player> getPointsABB() {
         return pointsABB;
     }
+
     public ABB<Integer, Player> getAssistsABB() {
         return assistsABB;
     }
@@ -90,6 +142,11 @@ public class App {
         return stealsAVL;
     }
 
-    
+    public Query getQuery() {
+        return query;
+    }
+
+
+
     
 }

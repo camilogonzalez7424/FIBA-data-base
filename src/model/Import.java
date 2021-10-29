@@ -8,8 +8,10 @@ import java.util.ArrayList;
 
 public class Import {
 
-    public Import() {
+    private App app;
 
+    public Import(App app) {
+        this.app = app;
     }
 
     public void importPlayer(String path, ArrayList<Player> list) throws IOException, FileNotFoundException {
@@ -21,12 +23,25 @@ public class Import {
         while (line != null) {
             String[] parts = line.split(";");
 
-            Player temp = new Player(parts[0], parts[1], Integer.parseInt(parts[2]),
-                    Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]),
-                    Integer.parseInt(parts[6]),Integer.parseInt(parts[7]));
+            Player temp = new Player(parts[0], parts[1], Integer.parseInt(parts[2]), Integer.parseInt(parts[3]),
+                    Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), Integer.parseInt(parts[6]),
+                    Integer.parseInt(parts[7]));
 
             // Añadir atributos a los arboles
             list.add(temp);
+
+            app.getPointsABB().insert(temp.getPoints(), temp);
+            //app.getPointsRB().insert(temp.getPoints(), temp);
+
+            app.getAssistsABB().insert(temp.getAssists(), temp);
+            app.getAssistsAVL().add(temp.getAssists(), temp);
+
+            app.getReboundsABB().insert(temp.getRebounds(), temp);
+            app.getReboundsAVL().add(temp.getRebounds(), temp);
+
+            app.getStealsABB().insert(temp.getSteals(), temp);
+            app.getStealsAVL().add(temp.getSteals(), temp);
+
             line = br.readLine();
         }
 

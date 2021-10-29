@@ -1,8 +1,10 @@
 package collections.AVL;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class AVLTree<K extends Comparable<K>,V> implements ActionAVL<K,V>{
+public class AVLTree<K extends Comparable<K>,V> implements ActionAVL<K,V>, Serializable {
+	private static final long serialVersionUID = 24323;
 
     private AVLTreeNode<K,V> root;
     private int size;

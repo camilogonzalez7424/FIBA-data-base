@@ -1,9 +1,11 @@
 package collections.ABB;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ABB<K extends Comparable<K>, V> implements ActionABB<K,V>{
-
+public class ABB<K extends Comparable<K>, V> implements ActionABB<K,V>, Serializable{
+    private static final long serialVersionUID = 456543;
+    
     private NodeABB<K, V> root;
 
     public void BTS() {

@@ -9,10 +9,10 @@ import view.SearchView;
 
 public class Main extends Application {
     
-    private App app;
+    private static App app;
 
     public static void main(String[] args){
-        new Main().app = new App();
+        app = new App();
 
         launch(args);
 
@@ -25,6 +25,6 @@ public class Main extends Application {
         SearchView view = new SearchView(app);
 		view.show();
 
-    }
+    }    
        
 }

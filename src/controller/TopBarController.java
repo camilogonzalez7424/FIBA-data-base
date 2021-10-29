@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.File;
+import java.io.IOException;
 
 import javafx.application.Platform;
 import javafx.scene.control.MenuItem;
@@ -73,7 +74,14 @@ public class TopBarController {
                 File file = fileChooser.showOpenDialog(stage.getScene().getWindow());
 
                 if (file != null) {
-                    gController.alert(AlertType.INFORMATION, "Ready to import", "Conectar a importar del modelo");
+                    try {
+                        app.importPlayers(file.getAbsolutePath());
+                        gController.alert(AlertType.INFORMATION, "Successfully", "Data imported correctly");
+                    } catch (IOException e1) {
+                        gController.alert(AlertType.WARNING, "Import Fail", "An error ocurred, try again");
+                        e1.printStackTrace();
+                    }
+                    
                 }
             });
         });

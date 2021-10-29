@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -12,10 +13,11 @@ import javafx.scene.control.Alert.AlertType;
 import model.App;
 import model.DataStructure;
 import model.Player;
+import model.Query.queryListener;
 import view.ResultView;
 import view.SearchView;
 
-public class SearchController {
+public class SearchController implements queryListener {
 
     private SearchView view;
     private GeneralController gController;
@@ -23,12 +25,14 @@ public class SearchController {
     private String dataStructure;
 
     private App app;
+    private long initTime;
+    private long time;
 
     public SearchController(SearchView searchView, App app) {
         this.app = app;
         this.view = searchView;
         this.gController = new GeneralController();
-
+        app.getQuery().setListener(this);
         queryResult = new ArrayList<>();
         /*
          * queryResult.add(new Player("Pedro", "Bulls", 23, 5, 4, 10, 30, 12));
@@ -38,6 +42,21 @@ public class SearchController {
 
         btnActions();
         toggleActions();
+        serialization();
+
+    }
+
+    private void serialization() {
+        try {
+            boolean loaded = app.loadData(app);
+            if (!loaded) {
+                gController.alert(AlertType.INFORMATION, "Welcome", "You will use a no records version");
+            }
+        } catch (ClassNotFoundException | IOException e) {
+
+            gController.alert(AlertType.ERROR, "Fail", "The data can't be loaded. The data file is corrupted");
+            e.printStackTrace();
+        }
     }
 
     private void btnActions() {
@@ -45,17 +64,18 @@ public class SearchController {
         view.getSearchBtn().setOnAction(e -> {
             String query = view.getSearchTF().getText();
 
-            if (makeQuery(query)) {
-
-                Platform.runLater(() -> {
-                    ResultView resultView = new ResultView(queryResult, System.currentTimeMillis(), dataStructure, app);
+            Platform.runLater(() -> {
+                if (makeQuery(query)) {
+                    ResultView resultView = new ResultView(queryResult, app);
+                    resultView.getController().queryLabel(time + "", dataStructure);
                     view.close();
                     resultView.show();
                     resultView.getController().initializeTableView();
-                });
-            } else {
-                gController.alert(AlertType.ERROR, "Query Fail", "Please check input and the filter selection");
-            }
+
+                } else {
+                    gController.alert(AlertType.ERROR, "Query Fail", "Please check input and the filter selection");
+                }
+            });
         });
 
     }
@@ -114,11 +134,13 @@ public class SearchController {
         boolean tree = rd.nextBoolean();
 
         RadioButton rb = (RadioButton) view.getFilter().getSelectedToggle();
+        initTime = System.currentTimeMillis();
 
         switch (rb.getText()) {
         case "by points":
 
             try {
+
                 if (tree) {
                     app.ABBSearch(Integer.parseInt(query), app.getPointsABB());
                     dataStructure = DataStructure.ABB.getDataStructure();
@@ -189,7 +211,8 @@ public class SearchController {
             }
             break;
         case "by name":
-
+            // resultView = new ResultView(queryResult, System.currentTimeMillis(),
+            // dataStructure, app);
             app.linearSearch(query, "by name");
             dataStructure = DataStructure.LINEAL.getDataStructure();
             result = true;
@@ -199,8 +222,10 @@ public class SearchController {
             try {
 
                 Integer.parseInt(query);
+
                 app.linearSearch(query, "by age");
                 dataStructure = DataStructure.LINEAL.getDataStructure();
+
                 result = true;
 
             } catch (NumberFormatException e) {
@@ -236,6 +261,13 @@ public class SearchController {
 
     private void numberAlert() {
         gController.alert(AlertType.ERROR, "Data type error", "please insert a number");
+    }
+
+    @Override
+    public void onResult(ArrayList<Player> result) {
+        queryResult = result;
+        time = System.currentTimeMillis() - initTime;
+
     }
 
 }

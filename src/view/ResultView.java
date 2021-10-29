@@ -51,7 +51,7 @@ public class ResultView extends Stage {
     private MenuItem goImport;
     
     @SuppressWarnings("unchecked")
-    public ResultView(ArrayList<Player> queryResult, long initTime, String structure, App app){
+    public ResultView(ArrayList<Player> queryResult, App app){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(Routes.RESULT_VIEW.getRoute()));
             Parent parent = loader.load();
@@ -84,7 +84,7 @@ public class ResultView extends Stage {
             this.setScene(scene);
             this.initStyle(StageStyle.UNDECORATED);
             
-            controller = new ResultController(this, queryResult, initTime, structure, app);
+            controller = new ResultController(this, queryResult, app);
             tController = new TopBarController(this, app);
     
         } catch (IOException e) {
