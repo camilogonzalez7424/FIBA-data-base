@@ -1,6 +1,7 @@
 package view;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import controller.ResultController;
@@ -21,7 +22,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.shape.Circle;
 
-public class ResultView extends Stage {
+public class ResultView extends Stage implements Serializable {
+
+    private static final long serialVersionUID = 66756543;
 
     private Scene scene;
     private ResultController controller;

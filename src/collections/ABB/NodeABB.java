@@ -1,6 +1,9 @@
 package collections.ABB;
 
-public class NodeABB<K, V> {
+import java.io.Serializable;
+
+public class NodeABB<K, V> implements Serializable {
+    private static final long serialVersionUID = 56716007;
     private K key;
     private V value;
     private NodeABB<K, V> left, right, parent;

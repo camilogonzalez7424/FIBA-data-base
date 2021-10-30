@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javafx.application.Platform;
@@ -11,7 +12,9 @@ import model.Player;
 import view.ResultView;
 import view.SearchView;
 
-public class ResultController{
+public class ResultController implements Serializable {
+
+    private static final long serialVersionUID = 456544333;
 
     private ResultView view;
     private ArrayList<Player> queryResult;

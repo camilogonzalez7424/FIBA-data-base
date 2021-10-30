@@ -18,7 +18,6 @@ public class App implements Serializable {
 
     private static final long serialVersionUID = 1241302341;
 
-    private Query query;
     private ArrayList<Player> players;
 
     private ABB<Integer, Player> pointsABB;
@@ -38,8 +37,6 @@ public class App implements Serializable {
     public App() {
         players = new ArrayList<>();
 
-        query = new Query();
-
         pointsABB = new ABB<>();
         assistsABB = new ABB<>();
         reboundsABB = new ABB<>();
@@ -53,16 +50,21 @@ public class App implements Serializable {
         im = new Import(this);
     }
 
-    public void ABBSearch(int key, ABB<Integer, Player> tree) {
+    public void ABBSearch(int key, ABB<Integer, Player> tree, Query.queryListener listener) {
+        Query query = new Query();
+        query.setListener(listener);
         query.searchABB(tree, key);
     }
 
-    public void AVLSearch(int key, AVLTree<Integer, Player> tree) {
+    public void AVLSearch(int key, AVLTree<Integer, Player> tree, Query.queryListener listener) {
+        Query query = new Query();
+        query.setListener(listener);
         query.searchAVL(tree, key);
     }
 
-    public void linearSearch(String key, String searchBy) {
-
+    public void linearSearch(String key, String searchBy, Query.queryListener listener) {
+        Query query = new Query();
+        query.setListener(listener);
         switch (searchBy) {
         case "by name":
             query.searchByName(key, players);
@@ -82,26 +84,26 @@ public class App implements Serializable {
     // Import
     public void importPlayers(String path) throws FileNotFoundException, IOException {
         im.importPlayer(path, players);
+        saveData(this);
     }
 
     // ------------------------------------ Serialization
 
-    public void saveData() throws IOException {
+    public void saveData(App app) throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME));
-        oos.writeObject(this);
+        oos.writeObject(app);
         oos.close();
     }
 
-    public boolean loadData(App app) throws IOException, ClassNotFoundException {
+    public App loadData(App app) throws IOException, ClassNotFoundException {
         File f = new File(FILE_NAME);
-        boolean loaded = false;
+        
         if (f.exists()) {
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
             app = (App) ois.readObject();
             ois.close();
-            loaded = true;
         }
-        return loaded;
+        return app;
     }
 
     // ------------------------------------ Getter and Setters
@@ -142,11 +144,7 @@ public class App implements Serializable {
         return stealsAVL;
     }
 
-    public Query getQuery() {
-        return query;
-    }
-
-    public void addPlayer(Player temp) {
+    public void addPlayer(Player temp) throws IOException {
         players.add(temp);
         pointsABB.insert(temp.getPoints(), temp);
         // pointsRB.insert(temp.getPoints(), temp);
@@ -159,9 +157,11 @@ public class App implements Serializable {
 
         stealsABB.insert(temp.getSteals(), temp);
         stealsAVL.add(temp.getSteals(), temp);
+
+        saveData(this);
     }
 
-    public void clean() {
+    public void clean() throws IOException {
         players = new ArrayList<>();
 
         pointsABB = new ABB<>();
@@ -173,6 +173,8 @@ public class App implements Serializable {
         assistsAVL = new AVLTree<>();
         reboundsAVL = new AVLTree<>();
         stealsAVL = new AVLTree<>();
+
+        saveData(this);
     }
 
 }

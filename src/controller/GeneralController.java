@@ -1,11 +1,15 @@
 package controller;
 
+import java.io.Serializable;
+
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
-public class GeneralController {
+public class GeneralController implements Serializable {
     
+    private static final long serialVersionUID = 452226543;
+
     public GeneralController() {
     }
 

@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 import javafx.application.Platform;
 import javafx.scene.control.MenuItem;
@@ -14,7 +15,9 @@ import view.AddView;
 import view.ResultView;
 import view.SearchView;
 
-public class TopBarController {
+public class TopBarController implements Serializable {
+
+    private static final long serialVersionUID = 45611122;
 
     private GeneralController gController;
     private App app;
@@ -22,14 +25,16 @@ public class TopBarController {
     public TopBarController(SearchView searchView, App app) {
         gController = new GeneralController();
         btnAction(searchView.getRedBtn(), searchView.getYellowBtn(), searchView.getStage());
-        menuActions(searchView.getGoSearch(), searchView.getGoAdd(), searchView.getGoImport(), searchView, searchView.getClean());
+        menuActions(searchView.getGoSearch(), searchView.getGoAdd(), searchView.getGoImport(), searchView,
+                searchView.getClean());
         this.app = app;
     }
 
     public TopBarController(ResultView resultView, App app) {
         gController = new GeneralController();
         btnAction(resultView.getRedBtn(), resultView.getYellowBtn(), resultView.getStage());
-        menuActions(resultView.getGoSearch(), resultView.getGoAdd(), resultView.getGoImport(), resultView, resultView.getClean());
+        menuActions(resultView.getGoSearch(), resultView.getGoAdd(), resultView.getGoImport(), resultView,
+                resultView.getClean());
         this.app = app;
     }
 
@@ -40,13 +45,13 @@ public class TopBarController {
         this.app = app;
     }
 
-    private void btnAction(Circle red, Circle yellow,  Stage stage) {
+    private void btnAction(Circle red, Circle yellow, Stage stage) {
         red.setOnMouseClicked(e -> {
             System.exit(0);
         });
 
         yellow.setOnMouseClicked(e -> {
-           stage.setIconified(true);
+            stage.setIconified(true);
         });
     }
 
@@ -74,20 +79,35 @@ public class TopBarController {
                 File file = fileChooser.showOpenDialog(stage.getScene().getWindow());
 
                 if (file != null) {
-                    try {
-                        app.importPlayers(file.getAbsolutePath());
-                        gController.alert(AlertType.INFORMATION, "Successfully", "Data imported correctly");
-                    } catch (IOException e1) {
-                        gController.alert(AlertType.WARNING, "Import Fail", "An error ocurred, try again");
-                        e1.printStackTrace();
-                    }
-                    
+                    Platform.runLater(() -> {
+                        try {
+                            app.importPlayers(file.getAbsolutePath());
+
+                            gController.alert(AlertType.INFORMATION, "Successfully", "Data imported correctly");
+                        } catch (IOException e1) {
+
+                            gController.alert(AlertType.WARNING, "Import Fail", "An error ocurred, try again");
+
+                            e1.printStackTrace();
+                        }
+                    });
                 }
             });
         });
 
-        clean.setOnAction((e)->{
-            app.clean();
+        clean.setOnAction((e) -> {
+            try {
+                app.clean();
+                Platform.runLater(() -> {
+                    gController.alert(AlertType.INFORMATION, "Success", "Data Base cleaned");
+                });
+            } catch (IOException e1) {
+                Platform.runLater(() -> {
+                    gController.alert(AlertType.ERROR, "Error", "Clean fail");
+                });
+
+                e1.printStackTrace();
+            }
         });
     }
 }

@@ -1,9 +1,12 @@
 package collections.AVL;
 
+import java.io.Serializable;
 
 //import java.util.LinkedList;
 
-public class AVLTreeNode<K extends Comparable<K>,V>{
+public class AVLTreeNode <K extends Comparable<K>,V> implements Serializable {
+
+	private static final long serialVersionUID = 456534343;
 
     private AVLTree<K,V> owner;
     private K   key;

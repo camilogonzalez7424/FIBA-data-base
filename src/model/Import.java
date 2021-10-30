@@ -4,9 +4,12 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Import {
+public class Import implements Serializable {
+
+    private static final long serialVersionUID = 4777743;
 
     private App app;
 

@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -17,7 +18,9 @@ import model.Query.queryListener;
 import view.ResultView;
 import view.SearchView;
 
-public class SearchController implements queryListener {
+public class SearchController implements queryListener, Serializable{
+
+    private static final long serialVersionUID = 4560013;
 
     private SearchView view;
     private GeneralController gController;
@@ -32,33 +35,12 @@ public class SearchController implements queryListener {
         this.app = app;
         this.view = searchView;
         this.gController = new GeneralController();
-        app.getQuery().setListener(this);
+    
         queryResult = new ArrayList<>();
-
-        /*
-         * queryResult.add(new Player("Pedro", "Bulls", 23, 5, 4, 10, 30, 12));
-         * queryResult.add(new Player("Rodrigo", "Celtics", 30, 11, 6, 7, 27, 15));
-         * queryResult.add(new Player("Andres", "Heat", 27, 2, 8, 14, 40, 24));
-         */
-
 
         btnActions();
         toggleActions();
-        serialization();
-
-    }
-
-    private void serialization() {
-        try {
-            boolean loaded = app.loadData(app);
-            if (!loaded) {
-                gController.alert(AlertType.INFORMATION, "Welcome", "You will use a no records version");
-            }
-        } catch (ClassNotFoundException | IOException e) {
-
-            gController.alert(AlertType.ERROR, "Fail", "The data can't be loaded. The data file is corrupted");
-            e.printStackTrace();
-        }
+        
     }
 
     private void btnActions() {
@@ -144,12 +126,12 @@ public class SearchController implements queryListener {
             try {
 
                 if (tree) {
-                    app.ABBSearch(Integer.parseInt(query), app.getPointsABB());
+                    app.ABBSearch(Integer.parseInt(query), app.getPointsABB(), this);
                     dataStructure = DataStructure.ABB.getDataStructure();
                 } else {
                     dataStructure = DataStructure.RB.getDataStructure();
                 }
-                app.ABBSearch(Integer.parseInt(query), app.getPointsABB()); // Borrar con el RB
+                app.ABBSearch(Integer.parseInt(query), app.getPointsABB(), this); // Borrar con el RB
                 dataStructure = DataStructure.ABB.getDataStructure();
                 result = true;
 
@@ -162,10 +144,10 @@ public class SearchController implements queryListener {
 
             try {
                 if (tree) {
-                    app.ABBSearch(Integer.parseInt(query), app.getAssistsABB());
+                    app.ABBSearch(Integer.parseInt(query), app.getAssistsABB(), this);
                     dataStructure = DataStructure.ABB.getDataStructure();
                 } else {
-                    app.AVLSearch(Integer.parseInt(query), app.getAssistsAVL());
+                    app.AVLSearch(Integer.parseInt(query), app.getAssistsAVL(), this);
                     dataStructure = DataStructure.AVL.getDataStructure();
                 }
                 result = true;
@@ -179,10 +161,10 @@ public class SearchController implements queryListener {
 
             try {
                 if (tree) {
-                    app.ABBSearch(Integer.parseInt(query), app.getReboundsABB());
+                    app.ABBSearch(Integer.parseInt(query), app.getReboundsABB(), this);
                     dataStructure = DataStructure.ABB.getDataStructure();
                 } else {
-                    app.AVLSearch(Integer.parseInt(query), app.getReboundsAVL());
+                    app.AVLSearch(Integer.parseInt(query), app.getReboundsAVL(), this);
                     dataStructure = DataStructure.AVL.getDataStructure();
                 }
 
@@ -197,10 +179,10 @@ public class SearchController implements queryListener {
 
             try {
                 if (tree) {
-                    app.ABBSearch(Integer.parseInt(query), app.getStealsABB());
+                    app.ABBSearch(Integer.parseInt(query), app.getStealsABB(), this);
                     dataStructure = DataStructure.ABB.getDataStructure();
                 } else {
-                    app.AVLSearch(Integer.parseInt(query), app.getStealsAVL());
+                    app.AVLSearch(Integer.parseInt(query), app.getStealsAVL(), this);
                     dataStructure = DataStructure.AVL.getDataStructure();
                 }
                 result = true;
@@ -213,7 +195,7 @@ public class SearchController implements queryListener {
         case "by name":
             // resultView = new ResultView(queryResult, System.currentTimeMillis(),
             // dataStructure, app);
-            app.linearSearch(query, "by name");
+            app.linearSearch(query, "by name", this);
             dataStructure = DataStructure.LINEAL.getDataStructure();
             result = true;
 
@@ -223,7 +205,7 @@ public class SearchController implements queryListener {
 
                 Integer.parseInt(query);
 
-                app.linearSearch(query, "by age");
+                app.linearSearch(query, "by age", this);
                 dataStructure = DataStructure.LINEAL.getDataStructure();
 
                 result = true;
@@ -235,7 +217,7 @@ public class SearchController implements queryListener {
             break;
         case "by team":
 
-            app.linearSearch(query, "by team");
+            app.linearSearch(query, "by team", this);
             dataStructure = DataStructure.LINEAL.getDataStructure();
             result = true;
 
@@ -245,7 +227,7 @@ public class SearchController implements queryListener {
             try {
 
                 Integer.parseInt(query);
-                app.linearSearch(query, "by games");
+                app.linearSearch(query, "by games", this);
                 dataStructure = DataStructure.LINEAL.getDataStructure();
                 result = true;
 

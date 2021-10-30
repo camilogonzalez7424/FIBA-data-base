@@ -1,5 +1,8 @@
 package controller;
 
+import java.io.IOException;
+import java.io.Serializable;
+
 import javafx.application.Platform;
 import javafx.scene.control.Alert.AlertType;
 import model.App;
@@ -7,7 +10,9 @@ import model.Player;
 import view.AddView;
 import view.SearchView;
 
-public class AddController {
+public class AddController implements Serializable {
+
+    private static final long serialVersionUID = 424311543;
 
     private AddView view;
     private GeneralController gController;
@@ -36,11 +41,28 @@ public class AddController {
                 int games = Integer.parseInt(view.getGamesTF().getText());
 
                 Player temp = new Player(name, age, team, points, rebounds, assists, steals, games);
-                app.addPlayer(temp);
-                gController.alert(AlertType.INFORMATION, "Success", "Player created successfully");
-                goBack();
+                try {
+                    app.addPlayer(temp);
+                } catch (IOException e1) {
+                    displayAlert(AlertType.ERROR, "Error", "Add fail");
+                    e1.printStackTrace();
+                }
+                
+                new Thread(()->{
+                    try {
+                        Platform.runLater(()->{
+                            displayAlert(AlertType.INFORMATION, "Success", "Player created successfully");
+                        });
+                        
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
+                    goBack();
+                }).run();
+                
             } else {
-                gController.alert(AlertType.WARNING, "Warning", "Please fill all fields");
+                displayAlert(AlertType.WARNING, "Warning", "Please fill all fields");
             }
         });
         
@@ -68,6 +90,12 @@ public class AddController {
             SearchView sv = new SearchView(app);
             view.close();
             sv.show();
+        });
+    }
+
+    private void displayAlert(AlertType type, String title, String msg ){
+        Platform.runLater(()->{
+            gController.alert(type, title, msg);
         });
     }
 

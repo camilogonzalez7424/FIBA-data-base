@@ -1,7 +1,9 @@
 package view;
 
 import java.io.IOException;
+import java.io.Serializable;
 
+import controller.GeneralController;
 import controller.SearchController;
 import controller.TopBarController;
 import javafx.application.Platform;
@@ -13,17 +15,23 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.App;
 import routes.Routes;
 
-public class SearchView extends Stage {
+public class SearchView extends Stage implements Serializable {
+
+    private static final long serialVersionUID = 65777743;
 
     private Scene scene;
     private SearchController controller;
     private TopBarController tController;
+    private GeneralController gController;
+
+    private App app;
 
     // View elements
     private TextField searchTF;
@@ -77,16 +85,39 @@ public class SearchView extends Stage {
             byAge = (RadioButton) loader.getNamespace().get("byAge");
             byTeam = (RadioButton) loader.getNamespace().get("byTeam");
             byGame = (RadioButton) loader.getNamespace().get("byGame");
+
+            this.app = app;
+            gController = new GeneralController();
+
+            serialization(app);
             
             scene = new Scene(parent);
             scene.getStylesheets().add(getClass().getResource(Routes.STYLE.getRoute()).toExternalForm());
             this.setScene(scene);
             this.initStyle(StageStyle.UNDECORATED);
             
-            controller = new SearchController(this, app);
-            tController = new TopBarController(this, app);
+            controller = new SearchController(this, this.app);
+            tController = new TopBarController(this, this.app);
     
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void serialization(App nApp) {
+        try {
+            app = app.loadData(app);
+            if (app.equals(nApp)) {
+                Platform.runLater(()->{
+                    gController.alert(AlertType.INFORMATION, "Welcome", "You will use a no records version");
+                });
+                
+            }
+        } catch (ClassNotFoundException | IOException e) {
+            Platform.runLater(()->{
+                gController.alert(AlertType.ERROR, "Fail", "The data can't be loaded. The data file is corrupted");
+            });
+            
             e.printStackTrace();
         }
     }

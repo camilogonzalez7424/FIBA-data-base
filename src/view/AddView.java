@@ -1,6 +1,7 @@
 package view;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import controller.AddController;
 import controller.TopBarController;
@@ -17,7 +18,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.shape.Circle;
 
-public class AddView extends Stage{
+public class AddView extends Stage implements Serializable {
+
+    private static final long serialVersionUID =33356543;
 
     private Scene scene;
     private AddController controller;

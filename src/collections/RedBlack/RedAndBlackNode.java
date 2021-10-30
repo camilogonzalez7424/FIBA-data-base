@@ -1,6 +1,10 @@
 package collections.RedBlack;
 
-public class RedAndBlackNode<K extends Comparable<K>, V> {
+import java.io.Serializable;
+
+public class RedAndBlackNode <K extends Comparable<K>, V> implements Serializable {
+
+	private static final long serialVersionUID = 400003;
 
     private static final int BLACK = 0; // The colors are constant
 	private static final int RED = 1;
