@@ -5,22 +5,30 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.App;
+import javafx.stage.StageStyle;
+import model.*;
+import routes.Routes;
 import view.AddView;
 import view.ResultView;
 import view.SearchView;
 
-public class TopBarController implements Serializable {
+public class TopBarController implements Serializable, Import.listener {
 
     private static final long serialVersionUID = 45611122;
 
     private GeneralController gController;
     private App app;
+    private Stage st2;
+    private Stage stage;
 
     public TopBarController(SearchView searchView, App app) {
         gController = new GeneralController();
@@ -58,7 +66,7 @@ public class TopBarController implements Serializable {
     private void menuActions(MenuItem goSearch, MenuItem goAdd, MenuItem goImport, Stage stage, MenuItem clean) {
         goSearch.setOnAction(e -> {
             Platform.runLater(() -> {
-                SearchView sv = new SearchView(app);
+                SearchView sv = new SearchView(app, false);
                 stage.close();
                 sv.show();
             });
@@ -73,26 +81,28 @@ public class TopBarController implements Serializable {
         });
 
         goImport.setOnAction(e -> {
-            Platform.runLater(() -> {
-                FileChooser fileChooser = new FileChooser();
-                fileChooser.setTitle("Choose File");
-                File file = fileChooser.showOpenDialog(stage.getScene().getWindow());
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Choose File");
+            File file = fileChooser.showOpenDialog(null); // stage.getScene().getWindow() - stage
+            this.stage = stage;
 
-                if (file != null) {
-                    Platform.runLater(() -> {
-                        try {
-                            app.importPlayers(file.getAbsolutePath());
+            if (file != null) {
+                displayLoad();
 
-                            gController.alert(AlertType.INFORMATION, "Successfully", "Data imported correctly");
-                        } catch (IOException e1) {
-
-                            gController.alert(AlertType.WARNING, "Import Fail", "An error ocurred, try again");
-
-                            e1.printStackTrace();
-                        }
-                    });
-                }
-            });
+                new Thread(() -> {
+                    try {
+                        app.importPlayers(file.getAbsolutePath(), this);
+                            Platform.runLater(()->{
+                                gController.alert(AlertType.INFORMATION, "Successfully", "Data imported correctly");
+                            });
+                    } catch (IOException e1) {
+                        Platform.runLater(()->{
+                            gController.alert(AlertType.ERROR, "ERROR", "Data imported fail");
+                        });
+                        e1.printStackTrace();
+                    }
+                }).start();
+            }
         });
 
         clean.setOnAction((e) -> {
@@ -109,5 +119,36 @@ public class TopBarController implements Serializable {
                 e1.printStackTrace();
             }
         });
+    }
+
+    private void displayLoad() {
+
+        st2 = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(Routes.LOADING.getRoute()));
+        Parent parent;
+        try {
+            parent = loader.load();
+            st2.setScene(new Scene(parent));
+            st2.initModality(Modality.WINDOW_MODAL);
+            st2.initStyle(StageStyle.UNDECORATED);
+            st2.initOwner(stage.getScene().getWindow());
+            st2.setOpacity(0.85);
+            st2.show();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onLoad() {
+        Platform.runLater(()->{
+            st2.close();
+        });
+        
+    }
+
+    @Override
+    public void onInit() {
+        //displayLoad();
     }
 }

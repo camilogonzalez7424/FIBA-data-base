@@ -43,14 +43,12 @@ public class AVLTreeNode <K extends Comparable<K>,V> implements Serializable {
                     height = right.height+1;
                     rightHeight = right.height;
                     return true;    
-                
             }else {
                 boolean status = right.add(k, v);
                 if(right.height+1 > height)
                     height = right.height+1;
                     rightHeight = right.height;
                     return status;
-                
             }
         }else{
             if(left == null){

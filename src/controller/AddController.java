@@ -49,15 +49,9 @@ public class AddController implements Serializable {
                 }
                 
                 new Thread(()->{
-                    try {
-                        Platform.runLater(()->{
-                            displayAlert(AlertType.INFORMATION, "Success", "Player created successfully");
-                        });
-                        
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e1) {
-                        e1.printStackTrace();
-                    }
+                    Platform.runLater(()->{
+                        displayAlert(AlertType.INFORMATION, "Success", "Player created successfully");
+                    });
                     goBack();
                 }).run();
                 
@@ -87,7 +81,7 @@ public class AddController implements Serializable {
 
     private void goBack(){
         Platform.runLater(() -> {
-            SearchView sv = new SearchView(app);
+            SearchView sv = new SearchView(app, false);
             view.close();
             sv.show();
         });

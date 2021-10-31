@@ -22,7 +22,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        SearchView view = new SearchView(app);
+        SearchView view = new SearchView(app, true);
         view.show();
 
     }

@@ -12,6 +12,7 @@ public class Import implements Serializable {
     private static final long serialVersionUID = 4777743;
 
     private App app;
+    private listener listener;
 
     public Import(App app) {
         this.app = app;
@@ -19,8 +20,11 @@ public class Import implements Serializable {
 
     public void importPlayer(String path, ArrayList<Player> list) throws IOException, FileNotFoundException {
 
+        listener.onInit();
+
         BufferedReader br = new BufferedReader(new FileReader(path));
         String line = br.readLine();
+
         line = br.readLine();
 
         while (line != null) {
@@ -49,6 +53,25 @@ public class Import implements Serializable {
         }
 
         br.close();
+        System.out.println("-------------------------Termino");
+        //Platform.runLater(()->{
+        listener.onLoad();
+        //});
+        
     }
 
+    public interface listener {
+        public void onLoad();
+        public void onInit();
+    }
+
+    public listener getListener() {
+        return listener;
+    }
+
+    public void setListener(listener listener) {
+        this.listener = listener;
+    }
+
+    
 }

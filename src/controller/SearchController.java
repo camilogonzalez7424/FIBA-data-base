@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
@@ -48,7 +47,7 @@ public class SearchController implements queryListener, Serializable{
         view.getSearchBtn().setOnAction(e -> {
             String query = view.getSearchTF().getText();
 
-            Platform.runLater(() -> {
+            //Platform.runLater(() -> {
                 if (makeQuery(query)) {
                     ResultView resultView = new ResultView(queryResult, app);
                     resultView.getController().queryLabel(time + "", dataStructure);
@@ -59,7 +58,7 @@ public class SearchController implements queryListener, Serializable{
                 } else {
                     gController.alert(AlertType.ERROR, "Query Fail", "Please check input and the filter selection");
                 }
-            });
+            //});
         });
 
     }
@@ -124,7 +123,6 @@ public class SearchController implements queryListener, Serializable{
         case "by points":
 
             try {
-
                 if (tree) {
                     app.ABBSearch(Integer.parseInt(query), app.getPointsABB(), this);
                     dataStructure = DataStructure.ABB.getDataStructure();

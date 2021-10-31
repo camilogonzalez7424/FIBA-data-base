@@ -1,12 +1,7 @@
 package model;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -30,8 +25,6 @@ public class App implements Serializable {
     private AVLTree<Integer, Player> reboundsAVL;
     private AVLTree<Integer, Player> stealsAVL;
 
-    private Import im;
-
     public final static String FILE_NAME = "data/db.fiba";
 
     public App() {
@@ -46,8 +39,6 @@ public class App implements Serializable {
         assistsAVL = new AVLTree<>();
         reboundsAVL = new AVLTree<>();
         stealsAVL = new AVLTree<>();
-
-        im = new Import(this);
     }
 
     public void ABBSearch(int key, ABB<Integer, Player> tree, Query.queryListener listener) {
@@ -82,14 +73,15 @@ public class App implements Serializable {
     }
 
     // Import
-    public void importPlayers(String path) throws FileNotFoundException, IOException {
-        im.importPlayer(path, players);
-        saveData(this);
+    public void importPlayers(String path, Import.listener listener) throws FileNotFoundException, IOException {
+        Import im = new Import(this);
+        im.setListener(listener);
+        im.importPlayer(path, players);      
     }
 
     // ------------------------------------ Serialization
 
-    public void saveData(App app) throws IOException {
+    /* public void saveData(App app) throws IOException {
         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME));
         oos.writeObject(app);
         oos.close();
@@ -104,7 +96,7 @@ public class App implements Serializable {
             ois.close();
         }
         return app;
-    }
+    } */
 
     // ------------------------------------ Getter and Setters
 
@@ -158,7 +150,6 @@ public class App implements Serializable {
         stealsABB.insert(temp.getSteals(), temp);
         stealsAVL.add(temp.getSteals(), temp);
 
-        saveData(this);
     }
 
     public void clean() throws IOException {
@@ -173,8 +164,6 @@ public class App implements Serializable {
         assistsAVL = new AVLTree<>();
         reboundsAVL = new AVLTree<>();
         stealsAVL = new AVLTree<>();
-
-        saveData(this);
     }
 
 }

@@ -58,7 +58,7 @@ public class SearchView extends Stage implements Serializable {
 
 
     
-    public SearchView(App app){
+    public SearchView(App app, boolean firstTime){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(Routes.SEARCH_VIEW.getRoute()));
             Parent parent = loader.load();
@@ -89,7 +89,9 @@ public class SearchView extends Stage implements Serializable {
             this.app = app;
             gController = new GeneralController();
 
-            serialization(app);
+            /* if(firstTime){
+                serialization(app);
+            } */
             
             scene = new Scene(parent);
             scene.getStylesheets().add(getClass().getResource(Routes.STYLE.getRoute()).toExternalForm());
@@ -104,7 +106,7 @@ public class SearchView extends Stage implements Serializable {
         }
     }
 
-    private void serialization(App nApp) {
+    /* private void serialization(App nApp) {
         try {
             app = app.loadData(app);
             if (app.equals(nApp)) {
@@ -120,7 +122,7 @@ public class SearchView extends Stage implements Serializable {
             
             e.printStackTrace();
         }
-    }
+    } */
 
     public void setPromptText(String text) {
         TextField tf = searchTF;

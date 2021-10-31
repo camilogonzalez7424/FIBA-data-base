@@ -14,40 +14,65 @@ public class ABB<K extends Comparable<K>, V> implements ActionABB<K, V>, Seriali
 
     @Override
     public void insert(K key, V value) {
+        
         root = insert(root, key, value);
     }
 
-    private NodeABB<K, V> insert(NodeABB<K, V> root, K key, V value) {
+    private NodeABB<K, V> insert(NodeABB<K, V> current, K key, V value) {
 
-        if (root == null) {
-            root = new NodeABB<>(key, value);
-            return root;
+        if (current == null) {
+            current = new NodeABB<>(key, value);
+            return current;
         }
 
-        if (key.compareTo(root.getKey()) < 0) {
-            root.setLeft(insert(root.getLeft(), key, value));
+        if (key.compareTo(current.getKey()) <= 0) {
+            current.setLeft(insert(current.getLeft(), key, value));
 
-        } else if (key.compareTo(root.getKey()) >= 0) {
-            root.setRight(insert(root.getRight(), key, value));
+        } else if (key.compareTo(current.getKey()) > 0) {
+            current.setRight(insert(current.getRight(), key, value));
         }
 
-        return root;
+        return current;
     }
+
+    /* private NodeABB<K, V> add(NodeABB<K, V> newNode) {
+        NodeABB<K, V> aux = null;
+        NodeABB<K, V> temp = root;
+
+        while (temp != null) {
+            // Ancestor
+            aux = temp;
+            if (newNode.getKey().compareTo(temp.getKey()) <= 0) {
+                temp = temp.getLeft();
+            } else {
+                temp = temp.getRight();
+            }
+        }
+        if (aux == null) {
+            root = newNode;
+        } else if (newNode.getKey().compareTo(aux.getKey()) <= 0) {
+            aux.setLeft(newNode);
+        } else {
+            aux.setRight(newNode);
+        }
+        return aux;
+    } */
 
     @Override
     public ArrayList<V> search(K key) {
         ArrayList<V> result = new ArrayList<>();
+        
         search(root, result, key);
         return result;
     }
 
-    private void search(NodeABB<K, V> root, ArrayList<V> list, K key) {
-        if (root != null) {
-            search(root.getLeft(), list, key);
-            if (root.getKey().equals(key)) {
-                list.add(root.getValue());
+    private void search(NodeABB<K, V> current, ArrayList<V> list, K key) {
+        if (current != null) {
+            search(current.getLeft(), list, key);
+            if (current.getKey().equals(key)) {
+                list.add(current.getValue());
             }
-            search(root.getRight(), list, key);
+            search(current.getRight(), list, key);
         }
     }
 

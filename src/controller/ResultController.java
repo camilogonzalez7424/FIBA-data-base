@@ -34,7 +34,7 @@ public class ResultController implements Serializable {
     private void goBack() {
         view.getCancelLabel().setOnMouseClicked((me) -> {
             Platform.runLater(() -> {
-                SearchView sv = new SearchView(app);
+                SearchView sv = new SearchView(app, false);
                 view.close();
                 sv.show();
             });
