@@ -35,29 +35,6 @@ public class ABB<K extends Comparable<K>, V> implements ActionABB<K, V>, Seriali
         return current;
     }
 
-    /* private NodeABB<K, V> add(NodeABB<K, V> newNode) {
-        NodeABB<K, V> aux = null;
-        NodeABB<K, V> temp = root;
-
-        while (temp != null) {
-            // Ancestor
-            aux = temp;
-            if (newNode.getKey().compareTo(temp.getKey()) <= 0) {
-                temp = temp.getLeft();
-            } else {
-                temp = temp.getRight();
-            }
-        }
-        if (aux == null) {
-            root = newNode;
-        } else if (newNode.getKey().compareTo(aux.getKey()) <= 0) {
-            aux.setLeft(newNode);
-        } else {
-            aux.setRight(newNode);
-        }
-        return aux;
-    } */
-
     @Override
     public ArrayList<V> search(K key) {
         ArrayList<V> result = new ArrayList<>();
