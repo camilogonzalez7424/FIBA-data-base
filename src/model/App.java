@@ -66,6 +66,12 @@ public class App implements Serializable {
         query.searchAVL(tree, key);
     }
 
+    public void RBSearch(int key, RedAndBlackTree<Integer, Player> tree, Query.queryListener listener) {
+        Query query = new Query();
+        query.setListener(listener);
+        query.searchRB(tree, key);
+    }
+
     public void linearSearch(String key, String searchBy, Query.queryListener listener) {
         Query query = new Query();
         query.setListener(listener);
@@ -95,7 +101,7 @@ public class App implements Serializable {
     // ------------------------------------ Serialization
 
     public void update(File file) throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
-        CSVWriter writer = new CSVWriter(new FileWriter(file), CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, "\n");
+        CSVWriter writer = new CSVWriter(new FileWriter(file), ';', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, "\n");
        
         for (Player player : players) {
             String[] row = player.toString().split(",");
@@ -154,7 +160,7 @@ public class App implements Serializable {
     public void addPlayer(Player temp) throws IOException {
         players.add(temp);
         pointsABB.insert(temp.getPoints(), temp);
-        // pointsRB.insert(temp.getPoints(), temp);
+        pointsRB.insert(temp.getPoints(), temp);
 
         assistsABB.insert(temp.getAssists(), temp);
         assistsAVL.add(temp.getAssists(), temp);

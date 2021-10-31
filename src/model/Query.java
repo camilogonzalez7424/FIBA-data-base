@@ -28,6 +28,8 @@ public class Query implements Serializable {
     }
 
     public void searchRB(RedAndBlackTree<Integer, Player> tree, int key) {
+        ArrayList<Player> result = tree.search(key);
+        listener.onResult(result);
     }
 
     public void searchByName(String key, ArrayList<Player> list){

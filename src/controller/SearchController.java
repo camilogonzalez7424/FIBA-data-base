@@ -122,14 +122,15 @@ public class SearchController implements queryListener, Serializable{
         case "by points":
 
             try {
+                // app.getPointsRB().inOrderPrint(); // <--------------------------------- Check
                 if (tree) {
                     app.ABBSearch(Integer.parseInt(query), app.getPointsABB(), this);
                     dataStructure = DataStructure.ABB.getDataStructure();
                 } else {
+                    app.RBSearch(Integer.parseInt(query), app.getPointsRB(), this);
                     dataStructure = DataStructure.RB.getDataStructure();
                 }
-                app.ABBSearch(Integer.parseInt(query), app.getPointsABB(), this); // Borrar con el RB
-                dataStructure = DataStructure.ABB.getDataStructure();
+                
                 result = true;
 
             } catch (NumberFormatException e) {

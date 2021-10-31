@@ -20,8 +20,11 @@ public class Import implements Serializable {
 
     public void importPlayer(String path, ArrayList<Player> list) throws IOException, FileNotFoundException {
 
-        listener.onInit();
-
+        
+        if(listener != null){
+            listener.onInit();  
+        }
+        System.out.println(path);
         BufferedReader br = new BufferedReader(new FileReader(path));
         String line = br.readLine();
 
@@ -38,7 +41,7 @@ public class Import implements Serializable {
             list.add(temp);
 
             app.getPointsABB().insert(temp.getPoints(), temp);
-            //app.getPointsRB().insert(temp.getPoints(), temp);
+            app.getPointsRB().insert(temp.getPoints(), temp);
 
             app.getAssistsABB().insert(temp.getAssists(), temp);
             app.getAssistsAVL().add(temp.getAssists(), temp);
@@ -53,11 +56,11 @@ public class Import implements Serializable {
         }
 
         br.close();
-        System.out.println("-------------------------Termino");
-        //Platform.runLater(()->{
-        listener.onLoad();
-        //});
-        
+
+        if(listener != null){
+            listener.onLoad();  
+        }
+              
     }
 
     public interface listener {
