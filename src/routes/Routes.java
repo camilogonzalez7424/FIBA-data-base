@@ -3,7 +3,7 @@ package routes;
 public enum Routes{
 
     SEARCH_VIEW("../ui/searchView.fxml"), RESULT_VIEW("../ui/resultView.fxml"), ADD_VIEW("../ui/addView.fxml"), 
-    STYLE("../ui/assets/style/style.css"), LOADING("../ui/loading.fxml"),; 
+    STYLE("../ui/assets/style/style.css"), LOADING("../ui/loading.fxml"), CSV("../ui/loading.fxml"); 
 
     private String route;
 

@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -55,7 +58,26 @@ public class TopBarController implements Serializable, Import.listener {
 
     private void btnAction(Circle red, Circle yellow, Stage stage) {
         red.setOnMouseClicked(e -> {
-            System.exit(0);
+            if (app.isAdded()) {
+                FileChooser fileChooser = new FileChooser();
+                fileChooser.setTitle("Open Resource File");
+                File file = fileChooser.showSaveDialog(stage);
+
+                if (file != null) {
+                    try {
+                        app.update(file);
+                        System.exit(0);
+                    } catch (CsvDataTypeMismatchException | CsvRequiredFieldEmptyException | IOException e1) {
+                        Platform.runLater(()->{
+                            gController.alert(AlertType.ERROR, "ERROR", "Data save fail");
+                        });
+                        e1.printStackTrace();
+                    }
+                }
+            } else {
+                System.exit(0);
+            }
+            
         });
 
         yellow.setOnMouseClicked(e -> {
@@ -92,11 +114,11 @@ public class TopBarController implements Serializable, Import.listener {
                 new Thread(() -> {
                     try {
                         app.importPlayers(file.getAbsolutePath(), this);
-                            Platform.runLater(()->{
-                                gController.alert(AlertType.INFORMATION, "Successfully", "Data imported correctly");
-                            });
+                        Platform.runLater(() -> {
+                            gController.alert(AlertType.INFORMATION, "Successfully", "Data imported correctly");
+                        });
                     } catch (IOException e1) {
-                        Platform.runLater(()->{
+                        Platform.runLater(() -> {
                             gController.alert(AlertType.ERROR, "ERROR", "Data imported fail");
                         });
                         e1.printStackTrace();
@@ -141,14 +163,14 @@ public class TopBarController implements Serializable, Import.listener {
 
     @Override
     public void onLoad() {
-        Platform.runLater(()->{
+        Platform.runLater(() -> {
             st2.close();
         });
-        
+
     }
 
     @Override
     public void onInit() {
-        //displayLoad();
+        // displayLoad();
     }
 }

@@ -1,9 +1,17 @@
 package model;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+
 import java.util.ArrayList;
+
+import com.opencsv.CSVWriter;
+
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
 import collections.ABB.ABB;
 import collections.AVL.AVLTree;
@@ -25,9 +33,14 @@ public class App implements Serializable {
     private AVLTree<Integer, Player> reboundsAVL;
     private AVLTree<Integer, Player> stealsAVL;
 
+    private boolean added;
+
     public final static String FILE_NAME = "data/db.fiba";
 
     public App() {
+
+        added = false;
+
         players = new ArrayList<>();
 
         pointsABB = new ABB<>();
@@ -76,27 +89,21 @@ public class App implements Serializable {
     public void importPlayers(String path, Import.listener listener) throws FileNotFoundException, IOException {
         Import im = new Import(this);
         im.setListener(listener);
-        im.importPlayer(path, players);      
+        im.importPlayer(path, players);
     }
 
     // ------------------------------------ Serialization
 
-    /* public void saveData(App app) throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME));
-        oos.writeObject(app);
-        oos.close();
-    }
-
-    public App loadData(App app) throws IOException, ClassNotFoundException {
-        File f = new File(FILE_NAME);
-        
-        if (f.exists()) {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
-            app = (App) ois.readObject();
-            ois.close();
+    public void update(File file) throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+        CSVWriter writer = new CSVWriter(new FileWriter(file), CSVWriter.DEFAULT_SEPARATOR, CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, "\n");
+       
+        for (Player player : players) {
+            String[] row = player.toString().split(",");
+            writer.writeNext(row);
         }
-        return app;
-    } */
+
+        writer.close();
+    }
 
     // ------------------------------------ Getter and Setters
 
@@ -136,6 +143,14 @@ public class App implements Serializable {
         return stealsAVL;
     }
 
+    public boolean isAdded() {
+        return added;
+    }
+
+    public void setAdded(boolean added) {
+        this.added = added;
+    }
+
     public void addPlayer(Player temp) throws IOException {
         players.add(temp);
         pointsABB.insert(temp.getPoints(), temp);
@@ -150,9 +165,13 @@ public class App implements Serializable {
         stealsABB.insert(temp.getSteals(), temp);
         stealsAVL.add(temp.getSteals(), temp);
 
+        added = true;
+
     }
 
     public void clean() throws IOException {
+        added = true;
+
         players = new ArrayList<>();
 
         pointsABB = new ABB<>();

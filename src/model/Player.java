@@ -2,18 +2,28 @@ package model;
 
 import java.io.Serializable;
 
+import com.opencsv.bean.CsvBindByName;
+
 public class Player implements Serializable {
 
     private static final long serialVersionUID = 00003;
 
+    @CsvBindByName
     private String name;
+    @CsvBindByName
     private String team;
+    @CsvBindByName
     private int age;
 
+    @CsvBindByName
     private int assists;
+    @CsvBindByName
     private int steals;
+    @CsvBindByName
     private int rebounds;
+    @CsvBindByName
     private int points;
+    @CsvBindByName
     private int games;
 
     public Player(String name, int age, String team, int points, int rebounds, int assists, int steals, int games) {
@@ -93,5 +103,14 @@ public class Player implements Serializable {
     public void setBlock(int games) {
         this.games = games;
     }
+
+    @Override
+    public String toString() {
+        return name + "," + age + "," + team + "," + points + ","
+                + rebounds + "," + assists + "," + steals + "," + games;
+    }
+
+    // String name, int age, String team, int points, int rebounds, int assists, int
+    // steals, int games
 
 }

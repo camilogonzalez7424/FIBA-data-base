@@ -3,7 +3,6 @@ package view;
 import java.io.IOException;
 import java.io.Serializable;
 
-import controller.GeneralController;
 import controller.SearchController;
 import controller.TopBarController;
 import javafx.application.Platform;
@@ -15,7 +14,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -29,7 +27,6 @@ public class SearchView extends Stage implements Serializable {
     private Scene scene;
     private SearchController controller;
     private TopBarController tController;
-    private GeneralController gController;
 
     private App app;
 
@@ -87,11 +84,6 @@ public class SearchView extends Stage implements Serializable {
             byGame = (RadioButton) loader.getNamespace().get("byGame");
 
             this.app = app;
-            gController = new GeneralController();
-
-            /* if(firstTime){
-                serialization(app);
-            } */
             
             scene = new Scene(parent);
             scene.getStylesheets().add(getClass().getResource(Routes.STYLE.getRoute()).toExternalForm());
@@ -105,24 +97,6 @@ public class SearchView extends Stage implements Serializable {
             e.printStackTrace();
         }
     }
-
-    /* private void serialization(App nApp) {
-        try {
-            app = app.loadData(app);
-            if (app.equals(nApp)) {
-                Platform.runLater(()->{
-                    gController.alert(AlertType.INFORMATION, "Welcome", "You will use a no records version");
-                });
-                
-            }
-        } catch (ClassNotFoundException | IOException e) {
-            Platform.runLater(()->{
-                gController.alert(AlertType.ERROR, "Fail", "The data can't be loaded. The data file is corrupted");
-            });
-            
-            e.printStackTrace();
-        }
-    } */
 
     public void setPromptText(String text) {
         TextField tf = searchTF;
