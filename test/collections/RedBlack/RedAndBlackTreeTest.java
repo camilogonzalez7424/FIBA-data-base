@@ -1,10 +1,5 @@
 package collections.RedBlack;
 
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
 public class RedAndBlackTreeTest {
 
     private RedAndBlackTree<Integer, Integer> treeRB;
@@ -12,7 +7,7 @@ public class RedAndBlackTreeTest {
     private void setup1() {
         treeRB = new RedAndBlackTree<>();
     }
-
+/*
     @Test
     public void testInsert() {
         setup1();
@@ -43,5 +38,5 @@ public class RedAndBlackTreeTest {
         assertEquals(2, treeRB.searchValue(12));
         assertEquals(9, treeRB.searchValue(6));
         assertNull(treeRB.searchValue(21));
-    }
+    }*/
 }

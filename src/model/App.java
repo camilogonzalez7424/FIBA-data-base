@@ -1,21 +1,14 @@
 package model;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Serializable;
-
-import java.util.ArrayList;
-
-import com.opencsv.CSVWriter;
-
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
-
 import collections.ABB.ABB;
 import collections.AVL.AVLTree;
 import collections.RedBlack.RedAndBlackTree;
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
+
+import java.io.*;
+import java.util.ArrayList;
 
 public class App implements Serializable {
 
@@ -71,6 +64,7 @@ public class App implements Serializable {
         query.setListener(listener);
         query.searchRB(tree, key);
     }
+
 
     public void linearSearch(String key, String searchBy, Query.queryListener listener) {
         Query query = new Query();
