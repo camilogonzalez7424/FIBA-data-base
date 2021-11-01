@@ -124,7 +124,7 @@ public class RedAndBlackTree<K extends Comparable<K>, V> implements ActionRedAnd
 
 	@Override
 	public boolean remove(K k) {
-		RedAndBlackNode<K, V> a = searchRemove(k);
+		RedAndBlackNode<K, V> a = searchNode(k);
 		if (a == null) {
 			return false;
 		} else {
@@ -135,7 +135,7 @@ public class RedAndBlackTree<K extends Comparable<K>, V> implements ActionRedAnd
 
 	public void remove(RedAndBlackNode<K, V> v) {
 
-		RedAndBlackNode<K, V> z = searchRemove(v.getKey());
+		RedAndBlackNode<K, V> z = searchNode(v.getKey());
 
 		RedAndBlackNode<K, V> x = redBlack;
 		RedAndBlackNode<K, V> y = redBlack;
@@ -412,7 +412,7 @@ public class RedAndBlackTree<K extends Comparable<K>, V> implements ActionRedAnd
 
 	}
 
-	public RedAndBlackNode<K, V> searchRemove(K key) {
+	public RedAndBlackNode<K, V> searchNode(K key) {
 		RedAndBlackNode<K, V> current = root;
 
 		while (!isRedBlack(current)) {
@@ -433,7 +433,7 @@ public class RedAndBlackTree<K extends Comparable<K>, V> implements ActionRedAnd
 	}
 
 	public V searchValue(K key) {
-		RedAndBlackNode<K, V> a = searchRemove(key);
+		RedAndBlackNode<K, V> a = searchNode(key);
 		if (a == null) {
 			return null;
 		} else {
@@ -441,23 +441,33 @@ public class RedAndBlackTree<K extends Comparable<K>, V> implements ActionRedAnd
 		}
 	}
 
+
 	@Override
 	public ArrayList<V> search(K key) {
 		ArrayList<V> result = new ArrayList<>();
 		search(root, result, key);
+		//result.add(searchValue(key));
+
 		return result;
+
+		
 	}
 
-	private void search(RedAndBlackNode<K, V> current, ArrayList<V> list, K key) {
-		if (current != null) {
-			search(current.getLeft(), list, key);
-			if (current.getKey().equals(key)) {
-				list.add(current.getValue());
+	private void search(RedAndBlackNode<K, V> root, ArrayList<V> list, K key) {
+		if(root != null) {
+			search(root.getLeft(), list, key);
+			if(root.getKey() == key){
+				list.add(root.getValue());
 			}
-			search(current.getRight(), list, key);
+			search(root.getRight(), list, key);
 		}
+
+
 	}
 
+
+
+/*
 	public void inOrderPrint() {
 		inOrderRec(root);
 	}
@@ -468,7 +478,7 @@ public class RedAndBlackTree<K extends Comparable<K>, V> implements ActionRedAnd
 			System.out.println(root.getValue());
 			inOrderRec(root.getRight());
 		}
-	}
+	}*/
 
 	public RedAndBlackNode<K, V> treeMinimum(RedAndBlackNode<K, V> node) {
 

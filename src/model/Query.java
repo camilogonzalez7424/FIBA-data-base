@@ -1,11 +1,11 @@
 package model;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-
 import collections.ABB.ABB;
 import collections.AVL.AVLTree;
 import collections.RedBlack.RedAndBlackTree;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Query implements Serializable {
 
@@ -26,6 +26,8 @@ public class Query implements Serializable {
         result = tree.search(key);
         listener.onResult(result);
     }
+
+
 
     public void searchRB(RedAndBlackTree<Integer, Player> tree, int key) {
         ArrayList<Player> result = tree.search(key);

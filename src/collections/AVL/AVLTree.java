@@ -69,20 +69,6 @@ public class AVLTree<K extends Comparable<K>,V> implements ActionAVL<K,V>, Seria
 		return false;
 	}
 
-	/* @Override
-	public AVLTreeNode<K, V> searchNode(K k) {
-		if (root == null) 
-        return null;
-		else return 
-        root.search(k);
-	} */
-	
-    /* Probar, igual se puede utilizar el mismo buscar del BTS, Es más podemos heredar
-	public LinkedList<V> searchByRange(K kStart, K kEnd){
-		if (root == null) return null;
-		else return root.searchByRange(kStart,kEnd);
-	}*/
-
 	@Override
 	public ArrayList<V> search(K key){
 		ArrayList<V> result = new ArrayList<>();

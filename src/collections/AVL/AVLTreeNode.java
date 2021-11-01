@@ -300,28 +300,7 @@ public class AVLTreeNode <K extends Comparable<K>,V> implements Serializable {
 		}
 	}
 	
-/*public LinkedList<V> searchByRange(K kStart, K kEnd){
-		LinkedList<V> temp = new LinkedList<>();
-		
-		if(kStart.compareTo(key)<0){
-			if (left != null){
-				temp.addAll(left.searchByRange(kStart,kEnd));
-			}
-		}
-		
-		if(kStart.compareTo(key)<=0&&kEnd.compareTo(key)>=0){
-			temp.add(value);
-		}
-		
-		if (kEnd.compareTo(key)>0){
-			if (right != null){
-				temp.addAll(right.searchByRange(kStart,kEnd));
-			}
-		}
-		
-		return temp;
-	}
-*/
+
 
 	
 	public void leftRotate(){

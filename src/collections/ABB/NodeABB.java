@@ -14,6 +14,8 @@ public class NodeABB<K, V> implements Serializable {
         left = right = null;
     }
 
+    //_______________Getters and Setters_______________
+
     public K getKey() {
         return key;
     }
