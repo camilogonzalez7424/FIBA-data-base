@@ -269,7 +269,7 @@ public class RedAndBlackTree<K extends Comparable<K>, V> implements ActionRedAnd
 	@Override
 	public ArrayList<V> search(K key) {
 		ArrayList<V> result = new ArrayList<>();
-		RedAndBlackNode<K,V> head = find1(key);
+		RedAndBlackNode<K,V> head = find(key);
 
 		result = getList(head, result, key);
 		return result;
