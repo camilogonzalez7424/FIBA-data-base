@@ -85,7 +85,7 @@ public class AVLTree<K extends Comparable<K>,V> implements ActionAVL<K,V>, Seria
             search(root.getRight(), list, key);
         }
     }
-	/* public V search(K k) {
+	 public V find(K k) {
 		if (root == null){
 			return null;
 		}else{
@@ -98,7 +98,7 @@ public class AVLTree<K extends Comparable<K>,V> implements ActionAVL<K,V>, Seria
 		}
 		
 	}
- */
+
 	@Override
 	public boolean isEmpty() {
 		return size==0;
