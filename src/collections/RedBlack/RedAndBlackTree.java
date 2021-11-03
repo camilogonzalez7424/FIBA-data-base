@@ -269,8 +269,18 @@ public class RedAndBlackTree<K extends Comparable<K>, V> implements ActionRedAnd
 	@Override
 	public ArrayList<V> search(K key) {
 		ArrayList<V> result = new ArrayList<>();
-		search(root,result,key);
+		RedAndBlackNode<K,V> head = find1(key);
+
+		result = getList(head, result, key);
 		return result;
+	}
+
+	private ArrayList<V> getList(RedAndBlackNode<K,V> head, ArrayList<V> list, K key){
+		while (head != null && head.getKey().equals(key)) {
+			list.add(head.getVal());
+			head = head.getLeft();
+		}
+		return list;
 	}
 
 	private void search(RedAndBlackNode<K,V> root, ArrayList<V> list, K key) {
