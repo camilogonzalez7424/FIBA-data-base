@@ -7,11 +7,11 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AVLTreeTest {
     private AVLTree<Integer,Integer> treeAVL;
 
-    private void setup1() {
+    private void setUpScenery1() {
         treeAVL = new AVLTree<>();
     }
 
-    private void setup2() {
+    private void setUpScenery2() {
         treeAVL.add(10, null);
         treeAVL.add(5, null);
         treeAVL.add(6, null);
@@ -27,7 +27,7 @@ public class AVLTreeTest {
 
     @Test
     public void testAdd() {
-        setup1();
+        setUpScenery1();
         treeAVL.add(10, 20);
         assertEquals(1,treeAVL.size());
         treeAVL.add(11, 20);
@@ -42,32 +42,32 @@ public class AVLTreeTest {
 
 
 
-/*
+
     @Test
     public void testRemove() {
-        setup1();
-        setup2();
+        setUpScenery1();
+        setUpScenery2();
 
         assertEquals(10,treeAVL.size());
-        assertEquals(7,treeAVL.search(15));
+        assertEquals(7,treeAVL.find(15));
 
         treeAVL.remove(15);
-        assertNull(treeAVL.search(15));
-    }*/
+        assertNull(treeAVL.find(15));
+    }
 
-/*
+
     @Test
     void testSearch() {
-        setup1();
-        setup2();
+        setUpScenery1();
+        setUpScenery2();
 
-        assertEquals(7,treeAVL.search(15));
-        assertNull(treeAVL.search(32));
-    }*/
+        assertEquals(7,treeAVL.find(15));
+        assertNull(treeAVL.find(32));
+    }
 
     @Test
     public void testIsEmpty() {
-        setup1();
+        setUpScenery1();
         assertTrue(treeAVL.isEmpty());
         treeAVL.add(2, 404);
         assertFalse(treeAVL.isEmpty());
@@ -75,7 +75,7 @@ public class AVLTreeTest {
 
     @Test
     public void testKeyExists() {
-        setup1();
+        setUpScenery1();
         treeAVL.add(2, 404);
         treeAVL.add(3, 202);
         assertFalse(treeAVL.keyExists(6));

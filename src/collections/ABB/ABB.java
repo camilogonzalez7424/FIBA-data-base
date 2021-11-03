@@ -114,4 +114,8 @@ public class ABB<K extends Comparable<K>, V> implements ActionABB<K, V>, Seriali
         }
         return min;
     }
+
+    public NodeABB<K, V> getRoot() {
+        return root;
+    }
 }
