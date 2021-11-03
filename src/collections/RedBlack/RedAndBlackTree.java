@@ -129,7 +129,7 @@ public class RedAndBlackTree<K extends Comparable<K>, V> implements ActionRedAnd
 	}
 
 
-	public RedAndBlackNode<K, V> find1(K key){
+	public RedAndBlackNode<K, V> find(K key){
 		RedAndBlackNode<K, V> x = this.root;
 		while(x != null){
 			if(key.compareTo(x.key) == 0){
@@ -147,7 +147,7 @@ public class RedAndBlackTree<K extends Comparable<K>, V> implements ActionRedAnd
 	}
 
 	public V get(K key){
-		RedAndBlackNode<K,V> res = find1(key);
+		RedAndBlackNode<K,V> res = find(key);
 		if(res == null) return null;
 		return res.val;
 	}
@@ -174,7 +174,7 @@ public class RedAndBlackTree<K extends Comparable<K>, V> implements ActionRedAnd
 	public V delete(K key){
 		if(key == null)return null;
 
-		RedAndBlackNode<K, V> z = this.find1(key);
+		RedAndBlackNode<K, V> z = this.find(key);
 		if(z == null){
 
 			return null;
